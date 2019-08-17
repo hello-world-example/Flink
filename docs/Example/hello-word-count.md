@@ -148,10 +148,14 @@ $ ./bin/flink run examples/streaming/SocketWindowWordCount.jar --port 9000
 
 日志内容如下
 
->dasd : 1
->sd : 1
+>dasd : 1  
+>
+>sd : 1  
+>
 >d : 1
+>
 >as : 3
+>
 >asdas : 1
 >
 >...
