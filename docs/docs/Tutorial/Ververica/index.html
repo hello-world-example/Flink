@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="相关资源  Apache Flink 入门教程  ✔️ 1. 为什么要学习 Apache Flink？ - 陈守元（巴真） 阿里巴巴 高级产品专家  2. Apache Flink 概念介绍：有状态流式处理引擎的基石  3. Flink 安装部署、环境配置及运行应用程序  4.DataStream API 编程  5. 客户端操作  6. Flink Window、Time  7. 状态管理与容错机制  8. Flink Table API 编程 ✔️ 9. Flink SQL 编程   Apache Flink 进阶教程   1. Flink Runtime核心机制剖析  2. Flink Time 深度解析  3、Flink Checkpoint-轻量级分布式快照  4、Flink on Yarn/K8S原理剖析及实践  5、Flink 数据类型和序列化  6、Flink 作业执行解析  7、Flink 网络流控与反压剖析  8、Metrics 和监控  9、Flink Connector 分享  10、本地部署Zeppelin开发Flink程序  11、Flink State 最佳实践 ✔️ 12、TensorFlow 与 Apache Flink 的结合  https://github."><meta property="og:title" content="" />
+<meta property="og:description" content="相关资源  Apache Flink 入门教程  ✔️ 1. 为什么要学习 Apache Flink？ - 陈守元（巴真） 阿里巴巴 高级产品专家  2. Apache Flink 概念介绍：有状态流式处理引擎的基石  3. Flink 安装部署、环境配置及运行应用程序  4.DataStream API 编程  5. 客户端操作  6. Flink Window、Time  7. 状态管理与容错机制  8. Flink Table API 编程 ✔️ 9. Flink SQL 编程   Apache Flink 进阶教程   1. Flink Runtime核心机制剖析  2. Flink Time 深度解析  3、Flink Checkpoint-轻量级分布式快照  4、Flink on Yarn/K8S原理剖析及实践  5、Flink 数据类型和序列化  6、Flink 作业执行解析  7、Flink 网络流控与反压剖析  8、Metrics 和监控  9、Flink Connector 分享  10、本地部署Zeppelin开发Flink程序  11、Flink State 最佳实践 ✔️ 12、TensorFlow 与 Apache Flink 的结合  https://github." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Tutorial/Ververica/" />
+
+<title>Ververica | Flink</title>
+<link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/Flink/book.min.d436f463c9471cfab26a8b71cd2f50b6abf5225806391453da4ca111d1834fef.css" integrity="sha256-1Db0Y8lHHPqyaotxzS9Qtqv1IlgGORRT2kyhEdGDT&#43;8=">
+
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/Flink"><span>Flink</span>
+  </a>
+</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li>
+<p><strong>Quick-Start</strong></p>
+<ul>
+<li>
+  <a href="/Flink/docs/Quick-Start/standalone-install/">Standalone 安装</a></li>
+<li>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Example</strong></p>
+<ul>
+<li>
+  <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Tutorial</strong></p>
+<ul>
+<li>
+  <a href="/Flink/docs/Tutorial/Ververica/"class=active>Ververica</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/Flink/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Ververica</strong>
+
+  <label for="toc-control">
+    <img src="/Flink/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#相关资源">相关资源</a>
+      <ul>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="相关资源">相关资源</h1>
+<ul>
+<li>Apache Flink 入门教程
+<ul>
+<li>✔️ 
+  <a href="https://www.bilibili.com/video/av45615081/">1. 为什么要学习 Apache Flink？</a> - 陈守元（巴真） 阿里巴巴 高级产品专家</li>
+<li>
+  <a href="https://www.bilibili.com/video/av46277503/">2. Apache Flink 概念介绍：有状态流式处理引擎的基石</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av46986124/">3. Flink 安装部署、环境配置及运行应用程序</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av47970985/">4.DataStream API 编程</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av49401210">5. 客户端操作</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av49401210">6. Flink Window、Time</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av49736102">7. 状态管理与容错机制</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av50460716">8. Flink Table API 编程</a></li>
+<li>✔️ 
+  <a href="https://www.bilibili.com/video/av50871853">9. Flink SQL 编程</a></li>
+</ul>
+</li>
+<li>Apache Flink 进阶教程
+<ul>
+<li>
+  <a href="https://www.bilibili.com/video/av52394455">1. Flink Runtime核心机制剖析</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av53193640">2. Flink Time 深度解析</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av54074405">3、Flink Checkpoint-轻量级分布式快照</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av53894887">4、Flink on Yarn/K8S原理剖析及实践</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av54080907">5、Flink 数据类型和序列化</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av54603593">6、Flink 作业执行解析</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av55487329">7、Flink 网络流控与反压剖析</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av56364280">8、Metrics 和监控</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av56902622">9、Flink Connector 分享</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av57881855">10、本地部署Zeppelin开发Flink程序</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av58787827">11、Flink State 最佳实践</a></li>
+<li>✔️ 
+  <a href="https://www.bilibili.com/video/av60808586">12、TensorFlow 与 Apache Flink 的结合</a>
+<ul>
+<li><a href="https://github.com/alibaba/flink-ai-extended">https://github.com/alibaba/flink-ai-extended</a></li>
+</ul>
+</li>
+<li>
+  <a href="https://www.bilibili.com/video/av61840225">13、 Apache Flink教程-深度探索Flink SQL</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av62740496">14、 Apache Flink Python API 的现状及未来规划</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av61840459">intel 特邀课程：Anlytics-Zoo 构建统一的大数据分析+AI流水线</a></li>
+</ul>
+</li>
+<li>Apache Flink 实战&amp;运维教程
+<ul>
+<li>
+  <a href="https://www.bilibili.com/video/av63039981">1、 Flink 反压:延时监控和调参控制</a></li>
+<li>
+  <a href="https://www.bilibili.com/video/av63884396">2、 Metric 指标、监控、报警</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="read-more">Read More</h2>
+<ul>
+<li>
+  <a href="https://space.bilibili.com/33807709/channel/index">bilibili 专栏</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/edit/master/HuGo/content/docs/Tutorial/Ververica.md" target="_blank" rel="noopener">
+      <img src="/Flink/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#相关资源">相关资源</a>
+      <ul>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

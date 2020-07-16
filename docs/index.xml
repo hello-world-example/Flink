@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Flink</title>
+    <link>https://hello-world-example.github.io/Flink/</link>
+    <description>Recent content on Flink</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	<atom:link href="https://hello-world-example.github.io/Flink/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/_sidebar/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/_sidebar/</guid>
+      <description>  Quick-Start
+  Standalone 安装  获取 Github 源码    Example
+  Word Count 示例程序    Tutorial
+  Ververica    </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Example/hello-word-count/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Example/hello-word-count/</guid>
+      <description>Word Count 示例程序 示例代码    SocketWindowWordCount.java   package org.apache.flink.streaming.examples.socket; import org.apache.flink.api.common.functions.FlatMapFunction; import org.apache.flink.api.common.functions.ReduceFunction; import org.apache.flink.api.java.utils.ParameterTool; import org.apache.flink.streaming.api.datastream.DataStream; import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment; import org.apache.flink.streaming.api.windowing.time.Time; import org.apache.flink.util.Collector; /** * Implements a streaming windowed version of the &amp;#34;WordCount&amp;#34; program. * * &amp;lt;p&amp;gt;This program connects to a server socket and reads strings from the socket. * The easiest way to try this out is to open a text server (at port 12345) * using the &amp;lt;i&amp;gt;netcat&amp;lt;/i&amp;gt; tool via * &amp;lt;pre&amp;gt; * nc -l 12345 * &amp;lt;/pre&amp;gt; * and run this example with the hostname and the port as arguments.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Internals/temp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Internals/temp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Quick-Start/github-code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Quick-Start/github-code/</guid>
+      <description>获取 Github 源码 获取代码 # clone 国内镜像仓库，速度会快一点 $ git clone https://gitee.com/mirrors/apache-flink.git flink $ cd flink # 设置远程仓库为自己 clone 的仓库 $ git remote set-url origin https://github.com/o-fork/flink.git # 更新一下代码 $ git pull -p # Alibaba Blink 分支 $ git checkout blink # 官方 1.8 版本分支 $ git checkout release-1.8 # 从官方 1.8 版本分支，创建一个自己的分支 $ git checkout -b dev_kail_v1.8 # 推送同步一下远程 $ git push --set-upstream origin dev_kail_v1.8 打包 添加 pom.xml 仓库 vim pom.xml 添加 阿里的 Maven 仓库，这样打包(下载 jar 包)时会稍微块一点</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Quick-Start/standalone-install/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Quick-Start/standalone-install/</guid>
+      <description>Standalone 安装 安装 $ java -version java version &amp;#34;1.8.0_151&amp;#34; Java(TM) SE Runtime Environment (build 1.8.0_151-b12) Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode) # https://flink.apache.org/downloads.html $ cd /opt/package $ wget https://www-us.apache.org/dist/flink/flink-1.8.1/flink-1.8.1-bin-scala_2.12.tgz $ cd /opt/websuite $ cp /opt/package/flink-1.8.1-bin-scala_2.12.tgz . $ tar zxvf flink-1.8.1-bin-scala_2.12.tgz $ rm flink-1.8.1-bin-scala_2.12.tgz # 启动 $ cd /opt/websuite/flink-1.8.1/ $ ./bin/start-cluster.sh # 启动的 Java 进程 $ jcmd 70940 org.apache.flink.runtime.taskexecutor.TaskManagerRunner --configDir /opt/websuite/flink-1.8.1/conf 70511 org.apache.flink.runtime.entrypoint.StandaloneSessionClusterEntrypoint --configDir /opt/websuite/flink-1.8.1/conf --executionMode cluster # 启动日志 $ tail -n 400 log/flink-*-standalonesession-*log* - -------------------------------------------------------------------------------- .</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Tutorial/Ververica/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Tutorial/Ververica/</guid>
+      <description>相关资源  Apache Flink 入门教程  ✔️ 1. 为什么要学习 Apache Flink？ - 陈守元（巴真） 阿里巴巴 高级产品专家  2. Apache Flink 概念介绍：有状态流式处理引擎的基石  3. Flink 安装部署、环境配置及运行应用程序  4.DataStream API 编程  5. 客户端操作  6. Flink Window、Time  7. 状态管理与容错机制  8. Flink Table API 编程 ✔️ 9. Flink SQL 编程   Apache Flink 进阶教程   1. Flink Runtime核心机制剖析  2. Flink Time 深度解析  3、Flink Checkpoint-轻量级分布式快照  4、Flink on Yarn/K8S原理剖析及实践  5、Flink 数据类型和序列化  6、Flink 作业执行解析  7、Flink 网络流控与反压剖析  8、Metrics 和监控  9、Flink Connector 分享  10、本地部署Zeppelin开发Flink程序  11、Flink State 最佳实践 ✔️ 12、TensorFlow 与 Apache Flink 的结合  https://github.</description>
+    </item>
+    
+  </channel>
+</rss>

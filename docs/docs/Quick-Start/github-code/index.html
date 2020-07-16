@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="获取 Github 源码 获取代码 # clone 国内镜像仓库，速度会快一点 $ git clone https://gitee.com/mirrors/apache-flink.git flink $ cd flink # 设置远程仓库为自己 clone 的仓库 $ git remote set-url origin https://github.com/o-fork/flink.git # 更新一下代码 $ git pull -p # Alibaba Blink 分支 $ git checkout blink # 官方 1.8 版本分支 $ git checkout release-1.8 # 从官方 1.8 版本分支，创建一个自己的分支 $ git checkout -b dev_kail_v1.8 # 推送同步一下远程 $ git push --set-upstream origin dev_kail_v1.8 打包 添加 pom.xml 仓库 vim pom.xml 添加 阿里的 Maven 仓库，这样打包(下载 jar 包)时会稍微块一点"><meta property="og:title" content="" />
+<meta property="og:description" content="获取 Github 源码 获取代码 # clone 国内镜像仓库，速度会快一点 $ git clone https://gitee.com/mirrors/apache-flink.git flink $ cd flink # 设置远程仓库为自己 clone 的仓库 $ git remote set-url origin https://github.com/o-fork/flink.git # 更新一下代码 $ git pull -p # Alibaba Blink 分支 $ git checkout blink # 官方 1.8 版本分支 $ git checkout release-1.8 # 从官方 1.8 版本分支，创建一个自己的分支 $ git checkout -b dev_kail_v1.8 # 推送同步一下远程 $ git push --set-upstream origin dev_kail_v1.8 打包 添加 pom.xml 仓库 vim pom.xml 添加 阿里的 Maven 仓库，这样打包(下载 jar 包)时会稍微块一点" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Quick-Start/github-code/" />
+
+<title>Github Code | Flink</title>
+<link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/Flink/book.min.d436f463c9471cfab26a8b71cd2f50b6abf5225806391453da4ca111d1834fef.css" integrity="sha256-1Db0Y8lHHPqyaotxzS9Qtqv1IlgGORRT2kyhEdGDT&#43;8=">
+
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/Flink"><span>Flink</span>
+  </a>
+</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li>
+<p><strong>Quick-Start</strong></p>
+<ul>
+<li>
+  <a href="/Flink/docs/Quick-Start/standalone-install/">Standalone 安装</a></li>
+<li>
+  <a href="/Flink/docs/Quick-Start/github-code/"class=active>获取 Github 源码</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Example</strong></p>
+<ul>
+<li>
+  <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Tutorial</strong></p>
+<ul>
+<li>
+  <a href="/Flink/docs/Tutorial/Ververica/">Ververica</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/Flink/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Github Code</strong>
+
+  <label for="toc-control">
+    <img src="/Flink/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#获取-github-源码">获取 Github 源码</a>
+      <ul>
+        <li><a href="#获取代码">获取代码</a></li>
+        <li><a href="#打包">打包</a>
+          <ul>
+            <li><a href="#添加-pomxml-仓库">添加 pom.xml 仓库</a></li>
+            <li><a href="#mvn-package">mvn package</a></li>
+          </ul>
+        </li>
+        <li><a href="#先关注以下模块">先关注以下模块</a></li>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="获取-github-源码">获取 Github 源码</h1>
+<h2 id="获取代码">获取代码</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># clone 国内镜像仓库，速度会快一点</span>
+$ git clone https://gitee.com/mirrors/apache-flink.git flink
+
+$ cd flink
+
+<span style="color:#75715e"># 设置远程仓库为自己 clone 的仓库</span>
+$ git remote set-url origin https://github.com/o-fork/flink.git
+<span style="color:#75715e"># 更新一下代码</span>
+$ git pull -p
+
+
+<span style="color:#75715e"># Alibaba Blink 分支</span>
+$ git checkout blink
+
+<span style="color:#75715e"># 官方 1.8 版本分支</span>
+$ git checkout release-1.8
+<span style="color:#75715e"># 从官方 1.8 版本分支，创建一个自己的分支</span>
+$ git checkout -b dev_kail_v1.8
+<span style="color:#75715e"># 推送同步一下远程</span>
+$ git push --set-upstream origin dev_kail_v1.8
+</code></pre></div><h2 id="打包">打包</h2>
+<h3 id="添加-pomxml-仓库">添加 pom.xml 仓库</h3>
+<p><code>vim pom.xml</code> 添加 阿里的 Maven 仓库，这样打包(下载 jar 包)时会稍微块一点</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;repositories&gt;</span>
+	<span style="color:#f92672">&lt;repository&gt;</span>
+		<span style="color:#f92672">&lt;id&gt;</span>aliyun<span style="color:#f92672">&lt;/id&gt;</span>
+		<span style="color:#f92672">&lt;url&gt;</span>https://maven.aliyun.com/repository/public<span style="color:#f92672">&lt;/url&gt;</span>
+	<span style="color:#f92672">&lt;/repository&gt;</span>
+<span style="color:#f92672">&lt;/repositories&gt;</span>
+
+<span style="color:#f92672">&lt;pluginRepositories&gt;</span>
+	<span style="color:#f92672">&lt;pluginRepository&gt;</span>
+		<span style="color:#f92672">&lt;id&gt;</span>aliyun<span style="color:#f92672">&lt;/id&gt;</span>
+		<span style="color:#f92672">&lt;url&gt;</span>https://maven.aliyun.com/repository/public<span style="color:#f92672">&lt;/url&gt;</span>
+	<span style="color:#f92672">&lt;/pluginRepository&gt;</span>
+<span style="color:#f92672">&lt;/pluginRepositories&gt;</span>
+</code></pre></div><h3 id="mvn-package">mvn package</h3>
+<pre><code># 第一次可能需要 10分钟
+$ mvn clean package -DskipTests
+</code></pre><h2 id="先关注以下模块">先关注以下模块</h2>
+<ul>
+<li><code>flink-examples</code> 示例程序
+<ul>
+<li><code>flink-examples-streaming</code> 流处理代码示例
+<ul>
+<li>wordcount</li>
+<li>windowing</li>
+<li>join</li>
+<li>statemachine</li>
+</ul>
+</li>
+<li><code>flink-examples-batch</code> 批处理代码示例</li>
+<li><code>flink-examples-table</code></li>
+</ul>
+</li>
+<li><code>docs</code>
+<ul>
+<li><code>./docs/build_docs.sh</code> 启动本地文档</li>
+</ul>
+</li>
+</ul>
+<h2 id="read-more">Read More</h2>
+<ul>
+<li>
+  <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/flinkDev/ide_setup.html">Importing Flink into an IDE</a></li>
+<li>
+  <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/flinkDev/building.html">Building Flink from Source</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/edit/master/HuGo/content/docs/Quick-Start/github-code.md" target="_blank" rel="noopener">
+      <img src="/Flink/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#获取-github-源码">获取 Github 源码</a>
+      <ul>
+        <li><a href="#获取代码">获取代码</a></li>
+        <li><a href="#打包">打包</a>
+          <ul>
+            <li><a href="#添加-pomxml-仓库">添加 pom.xml 仓库</a></li>
+            <li><a href="#mvn-package">mvn package</a></li>
+          </ul>
+        </li>
+        <li><a href="#先关注以下模块">先关注以下模块</a></li>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
