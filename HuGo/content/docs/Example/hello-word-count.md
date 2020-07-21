@@ -128,6 +128,7 @@ $ nc -l 9000
 ## 启动 SocketWindowWordCount 程序
 
 ```bash
+# main 方法运行 或 ↓
 $ ./bin/flink run examples/streaming/SocketWindowWordCount.jar --port 9000
 ```
 

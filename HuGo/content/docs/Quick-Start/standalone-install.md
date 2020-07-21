@@ -55,6 +55,6 @@ $ tail -n 400 log/flink-*-standalonesession-*log*
 
 ## Read More
 
-- [Local Setup Tutorial](https://ci.apache.org/projects/flink/flink-docs-release-1.8/tutorials/local_setup.html)
+- [Local Setup Tutorial](https://ci.apache.org/projects/flink/flink-docs-stable/ops/deployment/local.html)
 - [《Flink官方文档》Quick Start](http://ifeve.com/flink-quick-start/)
 

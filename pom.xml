@@ -1,26 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>Apache-Flink</groupId>
-    <artifactId>Apache-Flink</artifactId>
+    <groupId>xyz.kail.demo</groupId>
+    <artifactId>Flink</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
+    <modules>
+        <module>demo-flink-example</module>
+        <module>my-flink-project</module>
+    </modules>
 
     <properties>
-        <!-- 项目编码 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-
-        <!-- JDK 版本-->
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
 
-        <java.version>8</java.version>
-        <encoding>UTF-8</encoding>
+        <mainClass>缺少 mainClass</mainClass>
+
+        <slf4j.version>1.7.30</slf4j.version>
+        <!--<flink.version>1.11.0</flink.version>-->
+        <flink.version>1.10.1</flink.version>
+        <flink.scala.version>2.12</flink.scala.version>
+
+        <kafka.version>2.5.0</kafka.version>
+
     </properties>
 
     <dependencies>
@@ -32,36 +39,173 @@
         </dependency>
     </dependencies>
 
-    <!-- 默认行为 -->
-    <build>
+    <dependencyManagement>
+        <dependencies>
 
-        <plugins>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+                <!--<scope>provided</scope>-->
+            </dependency>
 
-            <!-- 项目编码 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
-                    <encoding>${maven.compiler.encoding}</encoding>
-                </configuration>
-            </plugin>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-java</artifactId>
+                <version>${flink.version}</version>
+                <!--<scope>provided</scope>-->
+            </dependency>
 
-            <!-- war 包的行为 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.2.3</version>
-                <configuration>
-                    <!-- war 没有 web.xml 编译通过 -->
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-streaming-java_${flink.scala.version}</artifactId>
+                <version>${flink.version}</version>
+                <!--<scope>provided</scope>-->
+            </dependency>
 
-        </plugins>
-    </build>
+            <!-- 所有类以标记为过时，@see org.apache.flink.core.fs.local -->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-connector-filesystem_${flink.scala.version}</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+
+            <!-- 通用的 Kafka 连接器，不跟踪 Kafka 版本 -->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-connector-kafka_${flink.scala.version}</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-connector-elasticsearch5_${flink.scala.version}</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka-clients</artifactId>
+                <version>${kafka.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+        <!--  模块根目录下 build.jar.profile 文件存在时，激活该 Profile  -->
+        <profile>
+            <id>flink.jar.profile</id>
+            <activation>
+                <file>
+                    <exists>flink.jar.profile</exists>
+                </file>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <configuration>
+                            <archive>
+                                <manifest>
+                                    <mainClass>${mainClass}</mainClass>
+                                    <addClasspath>true</addClasspath>
+                                    <classpathPrefix>lib/</classpathPrefix>
+                                    <!--  SNAPSHOT 版本 Class-Path 是 XXX-x.y.z-SNAPSHOT.jar  -->
+                                    <!--  而不是 XXX-x.y.z-20190517.110547-4.jar  -->
+                                    <!--  避免 Class-Path 与实际文件名不一致，找不到类  -->
+                                    <useUniqueVersions>false</useUniqueVersions>
+                                </manifest>
+                                <manifestEntries>
+                                    <Rose>*</Rose>
+                                    <!--  将 config目录也加入到 classPath 下  -->
+                                    <Class-Path>config/</Class-Path>
+                                </manifestEntries>
+                            </archive>
+                            <excludes>
+                                <exclude>*.properties</exclude>
+                                <exclude>*.yaml</exclude>
+                                <exclude>*.yml</exclude>
+                                <exclude>*.xml</exclude>
+                                <exclude>*.txt</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy-config</id>
+                                <!--  绑定到生命周期的compile阶段，即执行compile的时候就执行该插件  -->
+                                <phase>package</phase>
+                                <!--  使用插件的copy-resources目标  -->
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <encoding>UTF-8</encoding>
+                                    <!-- 拷贝到构建目录conf文件夹下  -->
+                                    <outputDirectory>${project.build.directory}/config</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <!--  需要拷贝的文件夹  -->
+                                            <directory>src/main/resources</directory>
+                                            <!--  需要拷贝的文件  -->
+                                            <includes>
+                                                <include>*.properties</include>
+                                                <include>*.yaml</include>
+                                                <include>*.yml</include>
+                                                <include>*.xml</include>
+                                                <include>*.txt</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                            <execution>
+                                <!--  创建一个没用的 lib 文件夹，避免运维打包命令出错  -->
+                                <id>create-lib</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>./</directory>
+                                            <includes>
+                                                <!--  拷贝一个没用的文件，否则报空指针  -->
+                                                <include>pom.xml</include>
+                                            </includes>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>copy</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>copy-dependencies</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <repositories>
         <repository>
