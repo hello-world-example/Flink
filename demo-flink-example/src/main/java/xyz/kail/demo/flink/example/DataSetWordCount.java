@@ -5,11 +5,16 @@ import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
+import xyz.kail.demo.flink.tools.SimpleLog;
 
 /**
  * @author Flink
  */
 public class DataSetWordCount {
+
+    static {
+        SimpleLog.init();
+    }
 
     public static void main(String[] args) throws Exception {
 

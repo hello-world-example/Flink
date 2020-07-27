@@ -8,7 +8,7 @@
 <meta property="og:description" content="Standalone 安装 安装 $ java -version java version &#34;1.8.0_151&#34; Java(TM) SE Runtime Environment (build 1.8.0_151-b12) Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode) # https://flink.apache.org/downloads.html $ cd /opt/package $ wget https://www-us.apache.org/dist/flink/flink-1.8.1/flink-1.8.1-bin-scala_2.12.tgz $ cd /opt/websuite $ cp /opt/package/flink-1.8.1-bin-scala_2.12.tgz . $ tar zxvf flink-1.8.1-bin-scala_2.12.tgz $ rm flink-1.8.1-bin-scala_2.12.tgz # 启动 $ cd /opt/websuite/flink-1.8.1/ $ ./bin/start-cluster.sh # 启动的 Java 进程 $ jcmd 70940 org.apache.flink.runtime.taskexecutor.TaskManagerRunner --configDir /opt/websuite/flink-1.8.1/conf 70511 org.apache.flink.runtime.entrypoint.StandaloneSessionClusterEntrypoint --configDir /opt/websuite/flink-1.8.1/conf --executionMode cluster # 启动日志 $ tail -n 400 log/flink-*-standalonesession-*log* - -------------------------------------------------------------------------------- ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Quick-Start/standalone-install/" />
-
+<meta property="article:modified_time" content="2020-07-21T18:50:46+08:00" />
 <title>Standalone Install | Flink</title>
 <link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
 
@@ -53,8 +53,12 @@ https://github.com/alex-shpak/hugo-book
 <li>
   <a href="/Flink/docs/Quick-Start/standalone-install/"class=active>Standalone 安装</a></li>
 <li>
-  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
+  <a href="/Flink/docs/Quick-Start/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
 </ul>
+</li>
+<li>
+<p>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></p>
 </li>
 <li>
 <p><strong>Example</strong></p>
@@ -180,7 +184,7 @@ $ tail -n <span style="color:#ae81ff">400</span> log/flink-*-standalonesession-*
 </code></pre></div><h2 id="read-more">Read More</h2>
 <ul>
 <li>
-  <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.8/tutorials/local_setup.html">Local Setup Tutorial</a></li>
+  <a href="https://ci.apache.org/projects/flink/flink-docs-stable/ops/deployment/local.html">Local Setup Tutorial</a></li>
 <li>
   <a href="http://ifeve.com/flink-quick-start/">《Flink官方文档》Quick Start</a></li>
 </ul>
@@ -193,6 +197,14 @@ $ tail -n <span style="color:#ae81ff">400</span> log/flink-*-standalonesession-*
   <div class="flex justify-between">
 
 
+
+  <div>
+    
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/commit/d03651104e3ec732d4a6741cec486e4944482a2c" title='Last modified by kaibin.yang | Jul 21, 2020' target="_blank" rel="noopener">
+      <img src="/Flink/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>Jul 21, 2020</span>
+    </a>
+  </div>
 
 
 

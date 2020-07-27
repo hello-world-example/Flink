@@ -8,7 +8,7 @@
 <meta property="og:description" content="获取 Github 源码 获取代码 # clone 国内镜像仓库，速度会快一点 $ git clone https://gitee.com/mirrors/apache-flink.git flink $ cd flink # 设置远程仓库为自己 clone 的仓库 $ git remote set-url origin https://github.com/o-fork/flink.git # 更新一下代码 $ git pull -p # Alibaba Blink 分支 $ git checkout blink # 官方 1.8 版本分支 $ git checkout release-1.8 # 从官方 1.8 版本分支，创建一个自己的分支 $ git checkout -b dev_kail_v1.8 # 推送同步一下远程 $ git push --set-upstream origin dev_kail_v1.8 打包 添加 pom.xml 仓库 vim pom.xml 添加 阿里的 Maven 仓库，这样打包(下载 jar 包)时会稍微块一点" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Quick-Start/github-code/" />
-
+<meta property="article:modified_time" content="2020-07-17T00:23:09+08:00" />
 <title>Github Code | Flink</title>
 <link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
 
@@ -53,8 +53,12 @@ https://github.com/alex-shpak/hugo-book
 <li>
   <a href="/Flink/docs/Quick-Start/standalone-install/">Standalone 安装</a></li>
 <li>
-  <a href="/Flink/docs/Quick-Start/github-code/"class=active>获取 Github 源码</a></li>
+  <a href="/Flink/docs/Quick-Start/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
 </ul>
+</li>
+<li>
+<p>
+  <a href="/Flink/docs/Quick-Start/github-code/"class=active>获取 Github 源码</a></p>
 </li>
 <li>
 <p><strong>Example</strong></p>
@@ -217,6 +221,14 @@ $ mvn clean package -DskipTests
   <div class="flex justify-between">
 
 
+
+  <div>
+    
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/commit/5ddbf9d46b5af53b5cdcb436f4432d2e633f977d" title='Last modified by kail | Jul 17, 2020' target="_blank" rel="noopener">
+      <img src="/Flink/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>Jul 17, 2020</span>
+    </a>
+  </div>
 
 
 

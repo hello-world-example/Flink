@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="flink-conf.yaml  不作任何修改的情况下，默认是单节点 如果自定义 Java 版本可通过 env.java.home / JAVA_HOME 指定      Key Def Value Desc      jobmanager.rpc.address localhost TaskManager 链接 JobManager    jobmanager.rpc.port 6123 TaskManager 链接 JobManager    rest.address 0.0.0.0 Client REST API    rest.port 8081 Client REST API         Mem jobmanager.memory.process.size / jobmanager.heap.size 1600m    Mem taskmanager."><meta property="og:title" content="" />
+<meta property="og:description" content="flink-conf.yaml  不作任何修改的情况下，默认是单节点 如果自定义 Java 版本可通过 env.java.home / JAVA_HOME 指定      Key Def Value Desc      jobmanager.rpc.address localhost TaskManager 链接 JobManager    jobmanager.rpc.port 6123 TaskManager 链接 JobManager    rest.address 0.0.0.0 Client REST API    rest.port 8081 Client REST API         Mem jobmanager.memory.process.size / jobmanager.heap.size 1600m    Mem taskmanager." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Quick-Start/Flink-Conf.yaml/" />
+<meta property="article:modified_time" content="2020-07-21T18:50:46+08:00" />
+<title>Flink Conf.yaml | Flink</title>
+<link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/Flink/book.min.d436f463c9471cfab26a8b71cd2f50b6abf5225806391453da4ca111d1834fef.css" integrity="sha256-1Db0Y8lHHPqyaotxzS9Qtqv1IlgGORRT2kyhEdGDT&#43;8=">
+
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/Flink"><span>Flink</span>
+  </a>
+</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li>
+<p><strong>Quick-Start</strong></p>
+<ul>
+<li>
+  <a href="/Flink/docs/Quick-Start/standalone-install/">Standalone 安装</a></li>
+<li>
+  <a href="/Flink/docs/Quick-Start/Flink-Conf.yaml/"class=active>flink-conf.yaml 配置</a></li>
+</ul>
+</li>
+<li>
+<p>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></p>
+</li>
+<li>
+<p><strong>Example</strong></p>
+<ul>
+<li>
+  <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Tutorial</strong></p>
+<ul>
+<li>
+  <a href="/Flink/docs/Tutorial/Ververica/">Ververica</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/Flink/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Flink Conf.yaml</strong>
+
+  <label for="toc-control">
+    <img src="/Flink/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#flink-confyaml">flink-conf.yaml</a>
+      <ul>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="flink-confyaml">flink-conf.yaml</h1>
+<ul>
+<li>不作任何修改的情况下，默认是单节点</li>
+<li>如果自定义 Java 版本可通过 <code>env.java.home</code> / <code>JAVA_HOME</code> 指定</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th>Key</th>
+<th>Def Value</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center"></td>
+<td><code>jobmanager.rpc.address</code></td>
+<td>localhost</td>
+<td>TaskManager 链接 JobManager</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td><code>jobmanager.rpc.port</code></td>
+<td>6123</td>
+<td>TaskManager 链接 JobManager</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td><code>rest.address</code></td>
+<td>0.0.0.0</td>
+<td>Client REST API</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td><code>rest.port</code></td>
+<td>8081</td>
+<td>Client REST API</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Mem</td>
+<td><code>jobmanager.memory.process.size</code> / <del><code>jobmanager.heap.size</code></del></td>
+<td>1600m</td>
+<td></td>
+</tr>
+<tr>
+<td align="center">Mem</td>
+<td><code>taskmanager.memory.process.size</code> / <del><code>taskmanager.heap.size</code></del></td>
+<td>1728m</td>
+<td></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">CPU</td>
+<td><code>taskmanager.numberOfTaskSlots</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">CPU</td>
+<td><code>parallelism.default</code></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">IO</td>
+<td>state.backend</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">IO</td>
+<td>state.checkpoints.dir</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">IO</td>
+<td>state.savepoints.dir</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center">IO</td>
+<td>io.tmp.dirs</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="center"></td>
+<td><code>web.submit.enable</code></td>
+<td>true</td>
+<td>是否允许在 UI 上提交作业</td>
+</tr>
+</tbody>
+</table>
+<h2 id="read-more">Read More</h2>
+<ul>
+<li>
+  <a href="https://ci.apache.org/projects/flink/flink-docs-stable/ops/config.html">Deployment &amp; Operations Configuration</a></li>
+<li>
+  <a href="http://www.54tianzhisheng.cn/2018/10/27/flink-config/">Flink 配置文件详解</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+  <div>
+    
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/commit/d03651104e3ec732d4a6741cec486e4944482a2c" title='Last modified by kaibin.yang | Jul 21, 2020' target="_blank" rel="noopener">
+      <img src="/Flink/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>Jul 21, 2020</span>
+    </a>
+  </div>
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/edit/master/HuGo/content/docs/Quick-Start/Flink-Conf.yaml.md" target="_blank" rel="noopener">
+      <img src="/Flink/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#flink-confyaml">flink-conf.yaml</a>
+      <ul>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

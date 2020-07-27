@@ -2,6 +2,7 @@ package xyz.kail.demo.flink.example;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.ReduceFunction;
+import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -68,7 +69,7 @@ public class SocketWindowWordCount {
                     }
                 })
                 // group by 切出来的单词，key 是 WordWithCount 类的字段名
-                .keyBy("word")
+                .keyBy((KeySelector<WordWithCount, String>) value -> value.word)
                 // 时间窗口是 5s，一次处理 5s 内的数据
                 .timeWindow(Time.seconds(5))
                 // 相同的 key 出现多次，如何处理

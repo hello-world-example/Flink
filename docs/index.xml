@@ -16,9 +16,64 @@
       
       <guid>https://hello-world-example.github.io/Flink/_sidebar/</guid>
       <description>  Quick-Start
-  Standalone 安装  获取 Github 源码    Example
+  Standalone 安装  flink-conf.yaml 配置     获取 Github 源码
+  Example
   Word Count 示例程序    Tutorial
   Ververica    </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Cli/sql-client/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Cli/sql-client/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Connectors/DataSet-Connectors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Connectors/DataSet-Connectors/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Connectors/DataStream-Connectors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Connectors/DataStream-Connectors/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Connectors/RichSinkFunction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Connectors/RichSinkFunction/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Connectors/RichSourceFunction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Connectors/RichSourceFunction/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Connectors/Table-SQL-Connectors/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Connectors/Table-SQL-Connectors/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -32,11 +87,29 @@
     
     <item>
       <title></title>
-      <link>https://hello-world-example.github.io/Flink/docs/Internals/temp/</link>
+      <link>https://hello-world-example.github.io/Flink/docs/Internals/Environment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hello-world-example.github.io/Flink/docs/Internals/temp/</guid>
+      <guid>https://hello-world-example.github.io/Flink/docs/Internals/Environment/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Quick-Start/Docker-Flink/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Quick-Start/Docker-Flink/</guid>
+      <description>Docker Flink help $ docker pull flink:1.11.0 # 查看帮助 $ docker run --rm flink:1.11.0 help standalone-job $ docker run -d \  -p 18081:8081 \  -p 16123:6123 \  --name flink_standalone \  flink:1.11.0 standalone-job Cluster $ docker network create flink-network # Job Manager $ docker run -d \  -p 28081:8081 \  -p 26123:6123 \  --network flink-network \  --env FLINK_PROPERTIES=&amp;#34;jobmanager.rpc.address: jobmanager&amp;#34; \  --name jobmanager \  flink:1.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Quick-Start/Flink-Conf.yaml/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Quick-Start/Flink-Conf.yaml/</guid>
+      <description>flink-conf.yaml  不作任何修改的情况下，默认是单节点 如果自定义 Java 版本可通过 env.java.home / JAVA_HOME 指定      Key Def Value Desc      jobmanager.rpc.address localhost TaskManager 链接 JobManager    jobmanager.rpc.port 6123 TaskManager 链接 JobManager    rest.address 0.0.0.0 Client REST API    rest.port 8081 Client REST API         Mem jobmanager.memory.process.size / jobmanager.heap.size 1600m    Mem taskmanager.</description>
     </item>
     
     <item>
@@ -55,6 +128,16 @@
       
       <guid>https://hello-world-example.github.io/Flink/docs/Quick-Start/standalone-install/</guid>
       <description>Standalone 安装 安装 $ java -version java version &amp;#34;1.8.0_151&amp;#34; Java(TM) SE Runtime Environment (build 1.8.0_151-b12) Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode) # https://flink.apache.org/downloads.html $ cd /opt/package $ wget https://www-us.apache.org/dist/flink/flink-1.8.1/flink-1.8.1-bin-scala_2.12.tgz $ cd /opt/websuite $ cp /opt/package/flink-1.8.1-bin-scala_2.12.tgz . $ tar zxvf flink-1.8.1-bin-scala_2.12.tgz $ rm flink-1.8.1-bin-scala_2.12.tgz # 启动 $ cd /opt/websuite/flink-1.8.1/ $ ./bin/start-cluster.sh # 启动的 Java 进程 $ jcmd 70940 org.apache.flink.runtime.taskexecutor.TaskManagerRunner --configDir /opt/websuite/flink-1.8.1/conf 70511 org.apache.flink.runtime.entrypoint.StandaloneSessionClusterEntrypoint --configDir /opt/websuite/flink-1.8.1/conf --executionMode cluster # 启动日志 $ tail -n 400 log/flink-*-standalonesession-*log* - -------------------------------------------------------------------------------- .</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/TODO/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/TODO/</guid>
+      <description>TODO 1.11.0
+Exception in thread &amp;ldquo;main&amp;rdquo; java.lang.IllegalStateException: No ExecutorFactory found to execute the application. at org.apache.flink.core.execution.DefaultExecutorServiceLoader.getExecutorFactory(DefaultExecutorServiceLoader.java:84) at org.apache.flink.api.java.ExecutionEnvironment.executeAsync(ExecutionEnvironment.java:964) at org.apache.flink.api.java.ExecutionEnvironment.execute(ExecutionEnvironment.java:889) at org.apache.flink.api.java.ExecutionEnvironment.execute(ExecutionEnvironment.java:873) at org.apache.flink.api.java.DataSet.collect(DataSet.java:413) at org.apache.flink.api.java.DataSet.print(DataSet.java:1652) at xyz.kail.demo.flink.example.DataSetWordCount.main(DataSetWordCount.java:30)</description>
     </item>
     
     <item>

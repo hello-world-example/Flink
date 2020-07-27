@@ -2,10 +2,10 @@
 <html lang="en">
 
 <head>
-	<meta name="generator" content="Hugo 0.68.3" />
+	<meta name="generator" content="Hugo 0.65.3" />
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content=" 官网   Apache Flink® - 数据流上的有状态计算  Alibaba Blink 介绍   文档  中文文档 ：https://flink.sojb.cn/ | https://flink.apachecn.org/docs/   社区  https://ververica.cn/ 知乎专栏：https://zhuanlan.zhihu.com/c_112486079   相关资料   阿里 Blink 和 Flink 合并计划「2019-02」    "><meta property="og:title" content="Flink" />
+<meta name="description" content=" 官网   Apache Flink® - 数据流上的有状态计算   Apache Flink Documentation ❤ Apache Flink 中文文档    Alibaba Blink 介绍   中文文档  [1.7] https://flink.sojb.cn/ [1.7] https://flink.apachecn.org/docs/   社区  https://ververica.cn/  Flink 中文邮件列表   专题  zhisheng Flink  博客：http://www.54tianzhisheng.cn/ 微信专栏： https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;album_id=1337172142412169216   Apache Flink Committer 云邪 ： http://wuchong.me/ 孙金成： https://enjoyment.cool/ 阿里云实时计算文档： https://help.aliyun.com/product/45029.html   案例   汽车之家基于 Flink 的实时 SQL 平台设计思路与实践   相关资料   阿里 Blink 和 Flink 合并计划「2019-02」    "><meta property="og:title" content="Flink" />
 <meta property="og:description" content="" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://hello-world-example.github.io/Flink/" />
@@ -55,8 +55,12 @@ https://github.com/alex-shpak/hugo-book
 <li>
   <a href="/Flink/docs/Quick-Start/standalone-install/">Standalone 安装</a></li>
 <li>
-  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
+  <a href="/Flink/docs/Quick-Start/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
 </ul>
+</li>
+<li>
+<p>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></p>
 </li>
 <li>
 <p><strong>Example</strong></p>
@@ -128,20 +132,48 @@ https://github.com/alex-shpak/hugo-book
 <li>官网
 <ul>
 <li>
-  <a href="https://flink.apache.org/zh/">Apache Flink® - 数据流上的有状态计算</a></li>
+  <a href="https://flink.apache.org/zh/">Apache Flink® - 数据流上的有状态计算</a>
+<ul>
+<li>
+  <a href="https://ci.apache.org/projects/flink/flink-docs-stable/">Apache Flink Documentation</a></li>
+<li>❤ 
+  <a href="https://ci.apache.org/projects/flink/flink-docs-stable/zh/">Apache Flink 中文文档</a></li>
+</ul>
+</li>
 <li>
   <a href="https://github.com/apache/flink/blob/blink/README.md#blink-1">Alibaba Blink 介绍</a></li>
 </ul>
 </li>
-<li>文档
+<li>中文文档
 <ul>
-<li>中文文档 ：https://flink.sojb.cn/ | <a href="https://flink.apachecn.org/docs/">https://flink.apachecn.org/docs/</a></li>
+<li>[1.7] <a href="https://flink.sojb.cn/">https://flink.sojb.cn/</a></li>
+<li>[1.7] <a href="https://flink.apachecn.org/docs/">https://flink.apachecn.org/docs/</a></li>
 </ul>
 </li>
 <li>社区
 <ul>
 <li><a href="https://ververica.cn/">https://ververica.cn/</a></li>
-<li>知乎专栏：https://zhuanlan.zhihu.com/c_112486079</li>
+<li>
+  <a href="http://apache-flink.147419.n8.nabble.com/">Flink 中文邮件列表</a></li>
+</ul>
+</li>
+<li>专题
+<ul>
+<li>zhisheng Flink
+<ul>
+<li>博客：http://www.54tianzhisheng.cn/</li>
+<li>微信专栏： <a href="https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;album_id=1337172142412169216">https://mp.weixin.qq.com/mp/appmsgalbum?action=getalbum&amp;album_id=1337172142412169216</a></li>
+</ul>
+</li>
+<li>Apache Flink Committer 云邪 ： <a href="http://wuchong.me/">http://wuchong.me/</a></li>
+<li>孙金成： <a href="https://enjoyment.cool/">https://enjoyment.cool/</a></li>
+<li>阿里云实时计算文档： <a href="https://help.aliyun.com/product/45029.html">https://help.aliyun.com/product/45029.html</a></li>
+</ul>
+</li>
+<li>案例
+<ul>
+<li>
+  <a href="https://ververica.cn/corporate_practice/storm-to-flink-autohome-real-time-sql-platform-based-on-flink/">汽车之家基于 Flink 的实时 SQL 平台设计思路与实践</a></li>
 </ul>
 </li>
 <li>相关资料
@@ -163,9 +195,9 @@ https://github.com/alex-shpak/hugo-book
 
   <div>
     
-    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/commit/2c08de387ab984e7fcbf498a829f66474422ebb3" title='Last modified by kail | Jul 17, 2020' target="_blank" rel="noopener">
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/commit/d03651104e3ec732d4a6741cec486e4944482a2c" title='Last modified by kaibin.yang | Jul 21, 2020' target="_blank" rel="noopener">
       <img src="/Flink/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>Jul 17, 2020</span>
+      <span>Jul 21, 2020</span>
     </a>
   </div>
 

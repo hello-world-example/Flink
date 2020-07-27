@@ -35,8 +35,10 @@ public class KafkaSinkElasticMain {
         properties.setProperty("group.id", "group-flink-topic-clickdata-event-batch-by-kail");
         KafkaDeserializationSchema<ObjectNode> deserializationSchema = new JSONKeyValueDeserializationSchema(true);
         FlinkKafkaConsumer<ObjectNode> kafkaConsumer = new FlinkKafkaConsumer<>(topic, deserializationSchema, properties);
-        // 从头开始消费
-        kafkaConsumer.setStartFromEarliest();
+        // 从头开始消费（每次都从头开始）
+        // kafkaConsumer.setStartFromEarliest();
+        // 消费者组当前的位置开始
+        kafkaConsumer.setStartFromGroupOffsets();
 
         /*
          * DataStream
@@ -65,7 +67,7 @@ public class KafkaSinkElasticMain {
          * 输出 ElasticSearch
          */
         Map<String, String> userConfig = new HashMap<>();
-        userConfig.put("cluster.name", "ttpai-elasticsearch-offline");
+        userConfig.put("cluster.name", "elasticsearch-offline");
         userConfig.put("bulk.flush.max.actions", "1");
 
         List<InetSocketAddress> addresses = new ArrayList<>();
@@ -75,7 +77,6 @@ public class KafkaSinkElasticMain {
             public IndexRequest createIndexRequest(JsonNode element) {
                 return Requests.indexRequest()
                         .index("kail-test-fink-sink")
-                        .type("kail-test-fink-sink")
                         .source(element.toString());
             }
 
