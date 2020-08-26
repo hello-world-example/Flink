@@ -11,9 +11,7 @@ type: docs
 - 中文文档
   - [1.7] https://flink.sojb.cn/
   - [1.7] https://flink.apachecn.org/docs/
-- 社区
-  - https://ververica.cn/
-  - [Flink 中文邮件列表](http://apache-flink.147419.n8.nabble.com/)
+- 社区：https://ververica.cn/
 - 专题
   - zhisheng Flink
     - 博客：http://www.54tianzhisheng.cn/
@@ -24,5 +22,6 @@ type: docs
 - 案例
   - [汽车之家基于 Flink 的实时 SQL 平台设计思路与实践](https://ververica.cn/corporate_practice/storm-to-flink-autohome-real-time-sql-platform-based-on-flink/)
 - 相关资料
+  - [Flink 原理与实现：架构和拓扑概览](https://developer.aliyun.com/article/57816)
   - [阿里 Blink 和 Flink 合并计划「2019-02」](https://www.infoq.cn/article/GZE4rOr5Y0BssyBR*Rv1)
 

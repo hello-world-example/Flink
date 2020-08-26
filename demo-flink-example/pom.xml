@@ -25,6 +25,11 @@
 
         <dependency>
             <groupId>org.apache.flink</groupId>
+            <artifactId>flink-clients_${flink.scala.version}</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.flink</groupId>
             <artifactId>flink-json</artifactId>
         </dependency>
 

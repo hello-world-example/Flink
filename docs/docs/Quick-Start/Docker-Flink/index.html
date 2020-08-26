@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Docker Flink help $ docker pull flink:1.11.0 # 查看帮助 $ docker run --rm flink:1.11.0 help standalone-job $ docker run -d \  -p 18081:8081 \  -p 16123:6123 \  --name flink_standalone \  flink:1.11.0 standalone-job Cluster $ docker network create flink-network # Job Manager $ docker run -d \  -p 28081:8081 \  -p 26123:6123 \  --network flink-network \  --env FLINK_PROPERTIES=&#34;jobmanager.rpc.address: jobmanager&#34; \  --name jobmanager \  flink:1."><meta property="og:title" content="" />
-<meta property="og:description" content="Docker Flink help $ docker pull flink:1.11.0 # 查看帮助 $ docker run --rm flink:1.11.0 help standalone-job $ docker run -d \  -p 18081:8081 \  -p 16123:6123 \  --name flink_standalone \  flink:1.11.0 standalone-job Cluster $ docker network create flink-network # Job Manager $ docker run -d \  -p 28081:8081 \  -p 26123:6123 \  --network flink-network \  --env FLINK_PROPERTIES=&#34;jobmanager.rpc.address: jobmanager&#34; \  --name jobmanager \  flink:1." />
+<meta name="description" content="Docker Flink help $ docker pull flink:1.11.0 # 查看帮助 $ docker run --rm flink:1.11.0 help Usage: docker-entrypoint.sh (jobmanager|standalone-job|taskmanager|help) standalone-job $ docker run -d \  -p 18081:8081 \  -p 16123:6123 \  --name flink_standalone \  flink:1.11.0 standalone-job Cluster $ docker network create flink-network # Job Manager $ docker run -d \  -p 28081:8081 \  -p 26123:6123 \  --network flink-network \  --env FLINK_PROPERTIES=&#34;jobmanager.rpc.address: jobmanager&#34; \  --name jobmanager \  flink:1."><meta property="og:title" content="" />
+<meta property="og:description" content="Docker Flink help $ docker pull flink:1.11.0 # 查看帮助 $ docker run --rm flink:1.11.0 help Usage: docker-entrypoint.sh (jobmanager|standalone-job|taskmanager|help) standalone-job $ docker run -d \  -p 18081:8081 \  -p 16123:6123 \  --name flink_standalone \  flink:1.11.0 standalone-job Cluster $ docker network create flink-network # Job Manager $ docker run -d \  -p 28081:8081 \  -p 26123:6123 \  --network flink-network \  --env FLINK_PROPERTIES=&#34;jobmanager.rpc.address: jobmanager&#34; \  --name jobmanager \  flink:1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Quick-Start/Docker-Flink/" />
 <meta property="article:modified_time" content="2020-07-21T18:50:46+08:00" />
@@ -47,28 +47,35 @@ https://github.com/alex-shpak/hugo-book
 
 
   <ul>
-<li>
-<p><strong>Quick-Start</strong></p>
+<li><strong>Quick-Start</strong>
 <ul>
 <li>
-  <a href="/Flink/docs/Quick-Start/standalone-install/">Standalone 安装</a></li>
+  <a href="/Flink/docs/Quick-Start/Install-By-Local/">Local 快速安装</a></li>
 <li>
-  <a href="/Flink/docs/Quick-Start/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
+  <a href="/Flink/docs/Quick-Start/Docker-Flink/"class=active>Docker 方式安装</a></li>
+</ul>
+</li>
+<li><strong>Opt</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-Cluster/">Standalone 集群方式</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-HA/">Standalone HA 部署</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
 </ul>
 </li>
 <li>
-<p>
-  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></p>
-</li>
-<li>
-<p><strong>Example</strong></p>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
+<li><strong>Example</strong>
 <ul>
 <li>
   <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
 </ul>
 </li>
 <li>
-<p><strong>Tutorial</strong></p>
+  <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a></li>
+<li><strong>Tutorial</strong>
 <ul>
 <li>
   <a href="/Flink/docs/Tutorial/Ververica/">Ververica</a></li>
@@ -143,6 +150,7 @@ https://github.com/alex-shpak/hugo-book
 
 <span style="color:#75715e"># 查看帮助</span>
 $ docker run --rm flink:1.11.0 help  
+Usage: docker-entrypoint.sh <span style="color:#f92672">(</span>jobmanager|standalone-job|taskmanager|help<span style="color:#f92672">)</span>
 </code></pre></div><h2 id="standalone-job">standalone-job</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ docker run -d <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  -p 18081:8081 <span style="color:#ae81ff">\

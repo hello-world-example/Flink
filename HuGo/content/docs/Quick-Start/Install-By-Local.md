@@ -1,4 +1,4 @@
-# Standalone 安装
+# Local 安装
 
 
 
@@ -11,21 +11,25 @@ Java(TM) SE Runtime Environment (build 1.8.0_151-b12)
 Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode)
 
 # https://flink.apache.org/downloads.html
+# 
 $ cd /opt/package
-$ wget https://www-us.apache.org/dist/flink/flink-1.8.1/flink-1.8.1-bin-scala_2.12.tgz
+$ wget https://downloads.apache.org/flink/flink-1.11.1/flink-1.11.1-bin-scala_2.12.tgz
 $ cd /opt/websuite
-$ cp /opt/package/flink-1.8.1-bin-scala_2.12.tgz .
-$ tar zxvf flink-1.8.1-bin-scala_2.12.tgz
-$ rm flink-1.8.1-bin-scala_2.12.tgz
+$ cp /opt/package/flink-1.11.1-bin-scala_2.12.tgz .
+$ tar zxvf flink-1.11.1-bin-scala_2.12.tgz
+$ rm flink-1.11.1-bin-scala_2.12.tgz
 
 # 启动
-$ cd /opt/websuite/flink-1.8.1/
+$ cd /opt/websuite/flink-1.11.1/
 $ ./bin/start-cluster.sh
 
 # 启动的 Java 进程
-$ jcmd
-70940 org.apache.flink.runtime.taskexecutor.TaskManagerRunner --configDir /opt/websuite/flink-1.8.1/conf
-70511 org.apache.flink.runtime.entrypoint.StandaloneSessionClusterEntrypoint --configDir /opt/websuite/flink-1.8.1/conf --executionMode cluster
+$ jps
+34240 TaskManagerRunner
+33989 StandaloneSessionClusterEntrypoint
+
+# 访问
+http://localhost:8081
 
 # 启动日志
 $ tail -n 400 log/flink-*-standalonesession-*log*

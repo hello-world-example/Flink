@@ -9,6 +9,7 @@ $ docker pull flink:1.11.0
 
 # 查看帮助
 $ docker run --rm flink:1.11.0 help  
+Usage: docker-entrypoint.sh (jobmanager|standalone-job|taskmanager|help)
 ```
 
 

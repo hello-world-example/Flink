@@ -5,13 +5,16 @@ headless: true
 
 
 - **Quick-Start**
-  - [Standalone 安装]({{< relref "/docs/Quick-Start/standalone-install.md" >}})
-  - [flink-conf.yaml 配置]({{< relref "/docs/Quick-Start/Flink-Conf.yaml.md" >}})
+  - [Local 快速安装]({{< relref "/docs/Quick-Start/Install-By-Local.md" >}})
+  - [Docker 方式安装]({{< relref "/docs/Quick-Start/Docker-Flink.md" >}})
+- **Opt**
+  - [Standalone 集群方式]({{< relref "/docs/Opt/Install-By-Standalone-Cluster.md" >}})
+  - [Standalone HA 部署]({{< relref "/docs/Opt/Install-By-Standalone-HA.md" >}})
+  - [flink-conf.yaml 配置]({{< relref "/docs/Opt/Flink-Conf.yaml.md" >}})
 - [获取 Github 源码]({{< relref "/docs/Quick-Start/github-code.md" >}})
-  
 - **Example**
   - [Word Count 示例程序]({{< relref "/docs/Example/hello-word-count.md" >}})
-
+- [**FAQ..**]({{< relref "/docs/FAQ/_index.md" >}})
 - **Tutorial**
   - [Ververica]({{< relref "/docs/Tutorial/Ververica.md" >}})
 

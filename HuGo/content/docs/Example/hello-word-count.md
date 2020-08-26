@@ -2,6 +2,17 @@
 
 
 
+## Maven 依赖
+
+```xml
+<dependency>
+  <groupId>org.apache.flink</groupId>
+  <artifactId>flink-java</artifactId>
+</dependency>
+```
+
+
+
 ## 示例代码
 
 > - [SocketWindowWordCount.java](https://github.com/apache/flink/blob/master/flink-examples/flink-examples-streaming/src/main/java/org/apache/flink/streaming/examples/socket/SocketWindowWordCount.java)

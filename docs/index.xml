@@ -15,11 +15,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hello-world-example.github.io/Flink/_sidebar/</guid>
-      <description>  Quick-Start
-  Standalone 安装  flink-conf.yaml 配置     获取 Github 源码
-  Example
-  Word Count 示例程序    Tutorial
-  Ververica    </description>
+      <description> Quick-Start   Local 快速安装  Docker 方式安装   Opt   Standalone 集群方式  Standalone HA 部署  flink-conf.yaml 配置    获取 Github 源码 Example   Word Count 示例程序    FAQ.. Tutorial   Ververica    </description>
     </item>
     
     <item>
@@ -82,7 +78,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hello-world-example.github.io/Flink/docs/Example/hello-word-count/</guid>
-      <description>Word Count 示例程序 示例代码    SocketWindowWordCount.java   package org.apache.flink.streaming.examples.socket; import org.apache.flink.api.common.functions.FlatMapFunction; import org.apache.flink.api.common.functions.ReduceFunction; import org.apache.flink.api.java.utils.ParameterTool; import org.apache.flink.streaming.api.datastream.DataStream; import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment; import org.apache.flink.streaming.api.windowing.time.Time; import org.apache.flink.util.Collector; /** * Implements a streaming windowed version of the &amp;#34;WordCount&amp;#34; program. * * &amp;lt;p&amp;gt;This program connects to a server socket and reads strings from the socket. * The easiest way to try this out is to open a text server (at port 12345) * using the &amp;lt;i&amp;gt;netcat&amp;lt;/i&amp;gt; tool via * &amp;lt;pre&amp;gt; * nc -l 12345 * &amp;lt;/pre&amp;gt; * and run this example with the hostname and the port as arguments.</description>
+      <description>Word Count 示例程序 Maven 依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.apache.flink&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;flink-java&amp;lt;/artifactId&amp;gt; &amp;lt;/dependency&amp;gt; 示例代码    SocketWindowWordCount.java   package org.apache.flink.streaming.examples.socket; import org.apache.flink.api.common.functions.FlatMapFunction; import org.apache.flink.api.common.functions.ReduceFunction; import org.apache.flink.api.java.utils.ParameterTool; import org.apache.flink.streaming.api.datastream.DataStream; import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment; import org.apache.flink.streaming.api.windowing.time.Time; import org.apache.flink.util.Collector; /** * Implements a streaming windowed version of the &amp;#34;WordCount&amp;#34; program. * * &amp;lt;p&amp;gt;This program connects to a server socket and reads strings from the socket. * The easiest way to try this out is to open a text server (at port 12345) * using the &amp;lt;i&amp;gt;netcat&amp;lt;/i&amp;gt; tool via * &amp;lt;pre&amp;gt; * nc -l 12345 * &amp;lt;/pre&amp;gt; * and run this example with the hostname and the port as arguments.</description>
     </item>
     
     <item>
@@ -96,20 +92,42 @@
     
     <item>
       <title></title>
-      <link>https://hello-world-example.github.io/Flink/docs/Quick-Start/Docker-Flink/</link>
+      <link>https://hello-world-example.github.io/Flink/docs/Opt/Flink-Conf.yaml/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hello-world-example.github.io/Flink/docs/Quick-Start/Docker-Flink/</guid>
-      <description>Docker Flink help $ docker pull flink:1.11.0 # 查看帮助 $ docker run --rm flink:1.11.0 help standalone-job $ docker run -d \  -p 18081:8081 \  -p 16123:6123 \  --name flink_standalone \  flink:1.11.0 standalone-job Cluster $ docker network create flink-network # Job Manager $ docker run -d \  -p 28081:8081 \  -p 26123:6123 \  --network flink-network \  --env FLINK_PROPERTIES=&amp;#34;jobmanager.rpc.address: jobmanager&amp;#34; \  --name jobmanager \  flink:1.</description>
+      <guid>https://hello-world-example.github.io/Flink/docs/Opt/Flink-Conf.yaml/</guid>
+      <description>flink-conf.yaml  不作任何修改的情况下，默认是单节点 如果自定义 Java 版本可通过 env.java.home / JAVA_HOME 指定      Key Def Value Desc      jobmanager.rpc.address localhost TaskManager 链接 JobManager    jobmanager.rpc.port 6123 TaskManager 链接 JobManager    rest.address 0.0.0.0 Client REST API    rest.port 8081 Client REST API         Mem jobmanager.memory.process.size / jobmanager.heap.size 1600m    Mem taskmanager.</description>
     </item>
     
     <item>
       <title></title>
-      <link>https://hello-world-example.github.io/Flink/docs/Quick-Start/Flink-Conf.yaml/</link>
+      <link>https://hello-world-example.github.io/Flink/docs/Opt/Install-By-Standalone-Cluster/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hello-world-example.github.io/Flink/docs/Quick-Start/Flink-Conf.yaml/</guid>
-      <description>flink-conf.yaml  不作任何修改的情况下，默认是单节点 如果自定义 Java 版本可通过 env.java.home / JAVA_HOME 指定      Key Def Value Desc      jobmanager.rpc.address localhost TaskManager 链接 JobManager    jobmanager.rpc.port 6123 TaskManager 链接 JobManager    rest.address 0.0.0.0 Client REST API    rest.port 8081 Client REST API         Mem jobmanager.memory.process.size / jobmanager.heap.size 1600m    Mem taskmanager.</description>
+      <guid>https://hello-world-example.github.io/Flink/docs/Opt/Install-By-Standalone-Cluster/</guid>
+      <description>Standalone 集群方式 环境准备  关闭防火墙 配置 ntp JDK 1.8.x+  配置 JAVA_HOME 或 在 conf/flink-conf.yaml 配置 env.java.home 指定 JDK 安装路径   创建 flink 用户 ssh 免密登陆  如果非默认端口，通过 在 conf/flink-conf.yaml 配置 env.ssh.opts: -p 2208 指定 ssh 端口   相同的目录结构（便于内置脚本会自动启动集群）  /opt/websuite/flink-1.11.1    集群节点 /etc/hosts
+172.16.2.220 s220.flink.learn.wx # JobManager-Master 172.16.2.221 s221.flink.learn.wx # TaskManager 172.16.2.222 s222.flink.learn.wx # TaskManager 创建 flink 用户 # 切换到 root 账户 $ sudo su - # 创建用户 $ useradd flink # 设置密码 flink $ passwd flink # 尝试登录（需密码） $ ssh -p 2208 flink@s221.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Opt/Install-By-Standalone-HA/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Opt/Install-By-Standalone-HA/</guid>
+      <description>Standalone HA 部署  请先参考 Standalone 集群方式， HA 的部署基于此
+ 概述  Standalone 独立集群部署方式，默认只有一个 JobManager 如果这个 JobManager 挂掉，则 无法提交程序，程序也会报错 Flink 的 HA 模式是 保证 JobManager 的高可用，多个 JobManager 做主备，一个挂掉之后，备机可以及时顶上 主备 JobManager 通过 Zookeeper 实现 依赖  Hadoop HDFS Zookeeper（可内置）    HDFS 搭建  参考： Hadoop 快速搭建
+ ??? 启用 内嵌 Zookeeper  【注意】以下操作全在 s220.flink.learn.wx 执行
+ $ vim conf/zoo.cfg # ZooKeeper quorum peers server.0=s220.flink.learn.wx:2888:3888 server.1=s221.flink.learn.wx:2888:3888 server.2=s222.flink.learn.wx:2888:3888 # server.2=host:peer-port:leader-port # 分发 zoo 配置文件 $ scp -r -P2208 /opt/websuite/flink-1.</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Quick-Start/Docker-Flink/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Quick-Start/Docker-Flink/</guid>
+      <description>Docker Flink help $ docker pull flink:1.11.0 # 查看帮助 $ docker run --rm flink:1.11.0 help Usage: docker-entrypoint.sh (jobmanager|standalone-job|taskmanager|help) standalone-job $ docker run -d \  -p 18081:8081 \  -p 16123:6123 \  --name flink_standalone \  flink:1.11.0 standalone-job Cluster $ docker network create flink-network # Job Manager $ docker run -d \  -p 28081:8081 \  -p 26123:6123 \  --network flink-network \  --env FLINK_PROPERTIES=&amp;#34;jobmanager.rpc.address: jobmanager&amp;#34; \  --name jobmanager \  flink:1.</description>
     </item>
     
     <item>
@@ -123,11 +141,11 @@
     
     <item>
       <title></title>
-      <link>https://hello-world-example.github.io/Flink/docs/Quick-Start/standalone-install/</link>
+      <link>https://hello-world-example.github.io/Flink/docs/Quick-Start/Install-By-Local/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://hello-world-example.github.io/Flink/docs/Quick-Start/standalone-install/</guid>
-      <description>Standalone 安装 安装 $ java -version java version &amp;#34;1.8.0_151&amp;#34; Java(TM) SE Runtime Environment (build 1.8.0_151-b12) Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode) # https://flink.apache.org/downloads.html $ cd /opt/package $ wget https://www-us.apache.org/dist/flink/flink-1.8.1/flink-1.8.1-bin-scala_2.12.tgz $ cd /opt/websuite $ cp /opt/package/flink-1.8.1-bin-scala_2.12.tgz . $ tar zxvf flink-1.8.1-bin-scala_2.12.tgz $ rm flink-1.8.1-bin-scala_2.12.tgz # 启动 $ cd /opt/websuite/flink-1.8.1/ $ ./bin/start-cluster.sh # 启动的 Java 进程 $ jcmd 70940 org.apache.flink.runtime.taskexecutor.TaskManagerRunner --configDir /opt/websuite/flink-1.8.1/conf 70511 org.apache.flink.runtime.entrypoint.StandaloneSessionClusterEntrypoint --configDir /opt/websuite/flink-1.8.1/conf --executionMode cluster # 启动日志 $ tail -n 400 log/flink-*-standalonesession-*log* - -------------------------------------------------------------------------------- .</description>
+      <guid>https://hello-world-example.github.io/Flink/docs/Quick-Start/Install-By-Local/</guid>
+      <description>Local 安装 安装 $ java -version java version &amp;#34;1.8.0_151&amp;#34; Java(TM) SE Runtime Environment (build 1.8.0_151-b12) Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode) # https://flink.apache.org/downloads.html # $ cd /opt/package $ wget https://downloads.apache.org/flink/flink-1.11.1/flink-1.11.1-bin-scala_2.12.tgz $ cd /opt/websuite $ cp /opt/package/flink-1.11.1-bin-scala_2.12.tgz . $ tar zxvf flink-1.11.1-bin-scala_2.12.tgz $ rm flink-1.11.1-bin-scala_2.12.tgz # 启动 $ cd /opt/websuite/flink-1.11.1/ $ ./bin/start-cluster.sh # 启动的 Java 进程 $ jps 34240 TaskManagerRunner 33989 StandaloneSessionClusterEntrypoint # 访问 http://localhost:8081 # 启动日志 $ tail -n 400 log/flink-*-standalonesession-*log* - -------------------------------------------------------------------------------- .</description>
     </item>
     
     <item>
@@ -136,8 +154,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hello-world-example.github.io/Flink/docs/TODO/</guid>
-      <description>TODO 1.11.0
-Exception in thread &amp;ldquo;main&amp;rdquo; java.lang.IllegalStateException: No ExecutorFactory found to execute the application. at org.apache.flink.core.execution.DefaultExecutorServiceLoader.getExecutorFactory(DefaultExecutorServiceLoader.java:84) at org.apache.flink.api.java.ExecutionEnvironment.executeAsync(ExecutionEnvironment.java:964) at org.apache.flink.api.java.ExecutionEnvironment.execute(ExecutionEnvironment.java:889) at org.apache.flink.api.java.ExecutionEnvironment.execute(ExecutionEnvironment.java:873) at org.apache.flink.api.java.DataSet.collect(DataSet.java:413) at org.apache.flink.api.java.DataSet.print(DataSet.java:1652) at xyz.kail.demo.flink.example.DataSetWordCount.main(DataSetWordCount.java:30)</description>
+      <description>TODO </description>
     </item>
     
     <item>

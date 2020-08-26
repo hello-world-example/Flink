@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Standalone 集群方式 环境准备  关闭防火墙 配置 ntp JDK 1.8.x&#43;  配置 JAVA_HOME 或 在 conf/flink-conf.yaml 配置 env.java.home 指定 JDK 安装路径   创建 flink 用户 ssh 免密登陆  如果非默认端口，通过 在 conf/flink-conf.yaml 配置 env.ssh.opts: -p 2208 指定 ssh 端口   相同的目录结构（便于内置脚本会自动启动集群）  /opt/websuite/flink-1.11.1    集群节点 /etc/hosts
+172.16.2.220 s220.flink.learn.wx # JobManager-Master 172.16.2.221 s221.flink.learn.wx # TaskManager 172.16.2.222 s222.flink.learn.wx # TaskManager 创建 flink 用户 # 切换到 root 账户 $ sudo su - # 创建用户 $ useradd flink # 设置密码 flink $ passwd flink # 尝试登录（需密码） $ ssh -p 2208 flink@s221."><meta property="og:title" content="" />
+<meta property="og:description" content="Standalone 集群方式 环境准备  关闭防火墙 配置 ntp JDK 1.8.x&#43;  配置 JAVA_HOME 或 在 conf/flink-conf.yaml 配置 env.java.home 指定 JDK 安装路径   创建 flink 用户 ssh 免密登陆  如果非默认端口，通过 在 conf/flink-conf.yaml 配置 env.ssh.opts: -p 2208 指定 ssh 端口   相同的目录结构（便于内置脚本会自动启动集群）  /opt/websuite/flink-1.11.1    集群节点 /etc/hosts
+172.16.2.220 s220.flink.learn.wx # JobManager-Master 172.16.2.221 s221.flink.learn.wx # TaskManager 172.16.2.222 s222.flink.learn.wx # TaskManager 创建 flink 用户 # 切换到 root 账户 $ sudo su - # 创建用户 $ useradd flink # 设置密码 flink $ passwd flink # 尝试登录（需密码） $ ssh -p 2208 flink@s221." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Opt/Install-By-Standalone-Cluster/" />
+
+<title>Install by Standalone Cluster | Flink</title>
+<link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/Flink/book.min.d436f463c9471cfab26a8b71cd2f50b6abf5225806391453da4ca111d1834fef.css" integrity="sha256-1Db0Y8lHHPqyaotxzS9Qtqv1IlgGORRT2kyhEdGDT&#43;8=">
+
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/Flink"><span>Flink</span>
+  </a>
+</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li><strong>Quick-Start</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Quick-Start/Install-By-Local/">Local 快速安装</a></li>
+<li>
+  <a href="/Flink/docs/Quick-Start/Docker-Flink/">Docker 方式安装</a></li>
+</ul>
+</li>
+<li><strong>Opt</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-Cluster/"class=active>Standalone 集群方式</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-HA/">Standalone HA 部署</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
+</ul>
+</li>
+<li>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
+<li><strong>Example</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
+</ul>
+</li>
+<li>
+  <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a></li>
+<li><strong>Tutorial</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Tutorial/Ververica/">Ververica</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/Flink/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Install by Standalone Cluster</strong>
+
+  <label for="toc-control">
+    <img src="/Flink/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#standalone-集群方式">Standalone 集群方式</a>
+      <ul>
+        <li><a href="#环境准备">环境准备</a></li>
+        <li><a href="#集群节点">集群节点</a></li>
+        <li><a href="#创建-flink-用户">创建 flink 用户</a></li>
+        <li><a href="#ssh-免密配置">ssh 免密配置</a></li>
+        <li><a href="#flink-非-ha-配置">flink 非 HA 配置</a></li>
+        <li><a href="#分发程序">分发程序</a></li>
+        <li><a href="#启动集群">启动集群</a></li>
+        <li><a href="#faq">FAQ</a>
+          <ul>
+            <li><a href="#could-not-get-jvm-parameters-and-dynamic-configurations-properly">Could not get JVM parameters and dynamic configurations properly.</a></li>
+          </ul>
+        </li>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="standalone-集群方式">Standalone 集群方式</h1>
+<h2 id="环境准备">环境准备</h2>
+<ul>
+<li>关闭防火墙</li>
+<li>配置 ntp</li>
+<li>JDK 1.8.x+
+<ul>
+<li>配置 <code>JAVA_HOME</code> 或</li>
+<li>在 <code>conf/flink-conf.yaml</code> 配置 <code>env.java.home</code> 指定 JDK 安装路径</li>
+</ul>
+</li>
+<li>创建 <code>flink</code> 用户</li>
+<li>ssh 免密登陆
+<ul>
+<li>如果非默认端口，通过 在 <code>conf/flink-conf.yaml</code> 配置 <code>env.ssh.opts: -p 2208</code> 指定 ssh 端口</li>
+</ul>
+</li>
+<li>相同的目录结构（便于内置脚本会自动启动集群）
+<ul>
+<li><code>/opt/websuite/flink-1.11.1</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="集群节点">集群节点</h2>
+<p>/etc/hosts</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">172.16.2.220    s220.flink.learn.wx     <span style="color:#75715e"># JobManager-Master</span>
+172.16.2.221    s221.flink.learn.wx     <span style="color:#75715e"># TaskManager</span>
+172.16.2.222    s222.flink.learn.wx     <span style="color:#75715e"># TaskManager</span>
+</code></pre></div><h2 id="创建-flink-用户">创建 flink 用户</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 切换到 root 账户</span>
+$ sudo su - 
+
+<span style="color:#75715e"># 创建用户</span>
+$ useradd flink
+<span style="color:#75715e"># 设置密码 flink</span>
+$ passwd flink
+
+<span style="color:#75715e"># 尝试登录（需密码）</span>
+$ ssh -p <span style="color:#ae81ff">2208</span> flink@s221.flink.learn.wx
+</code></pre></div><h2 id="ssh-免密配置">ssh 免密配置</h2>
+<blockquote>
+<ul>
+<li>【注意】以下操作全在 <code>s220.flink.learn.wx</code> 执行</li>
+<li>只配置了 <code>s220</code> 可以免密登陆 <code>s221</code> 和 <code>s222</code>，反向并不能免密</li>
+</ul>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 切换 flink 用户</span>
+$ su - flink
+
+<span style="color:#75715e"># 生成 公钥和私钥</span>
+$ ssh-keygen -t rsa -P <span style="color:#e6db74">&#34;&#34;</span> -f ~/.ssh/id_rsa -C <span style="color:#e6db74">&#34;s220.flink.learn.wx&#34;</span>
+
+$ ll .ssh/
+id_rsa       <span style="color:#75715e"># 私钥</span>
+id_rsa.pub   <span style="color:#75715e"># 公钥</span>
+
+<span style="color:#75715e"># 当前机器 到 当前机器的免密登陆</span>
+$ cat ~/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys
+$ chmod g-w ~/.ssh <span style="color:#f92672">&amp;&amp;</span> chmod <span style="color:#ae81ff">600</span> ~/.ssh/authorized_keys
+$ ssh -p2208 flink@127.0.0.1
+
+
+<span style="color:#75715e"># Copy 公钥到 s221.flink.learn.wx， 并设置权限，前两步需要密码</span>
+$ ssh -p2208 flink@s221.flink.learn.wx <span style="color:#e6db74">&#34;mkdir -p .ssh &amp;&amp; cat&gt;&gt;.ssh/authorized_keys&#34;</span> &lt;.ssh/id_rsa.pub
+$ ssh -p2208 flink@s221.flink.learn.wx <span style="color:#e6db74">&#34;chmod g-w .ssh &amp;&amp; chmod 600 .ssh/authorized_keys&#34;</span>
+<span style="color:#75715e"># 测试免密是否成功（记得 exist 退出）</span>
+$ ssh -p <span style="color:#ae81ff">2208</span> flink@s221.flink.learn.wx
+
+
+<span style="color:#75715e"># Copy 公钥到 s222.flink.learn.wx， 并设置权限，前两步需要密码</span>
+$ ssh -p2208 flink@s222.flink.learn.wx <span style="color:#e6db74">&#34;mkdir -p .ssh &amp;&amp; cat&gt;&gt;.ssh/authorized_keys&#34;</span> &lt;.ssh/id_rsa.pub
+$ ssh -p2208 flink@s222.flink.learn.wx <span style="color:#e6db74">&#34;chmod g-w .ssh &amp;&amp; chmod 600 .ssh/authorized_keys&#34;</span>
+<span style="color:#75715e"># 测试免密是否成功（记得 exist 退出）</span>
+$ ssh -p <span style="color:#ae81ff">2208</span> flink@s222.flink.learn.wx
+</code></pre></div><blockquote>
+<ul>
+<li>如果免密配置失败，查看 <code>/var/log/secure</code> 日志文件中的提示信息</li>
+</ul>
+</blockquote>
+<h2 id="flink-非-ha-配置">flink 非 HA 配置</h2>
+<blockquote>
+<p>【注意】以下操作全在 <code>s220.flink.learn.wx</code> 执行</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ /opt/websuite
+
+$ tar zxvf flink-1.11.1-bin-scala_2.12.tgz
+$ cd /opt/websuite/flink-1.11.1
+
+<span style="color:#75715e"># 修改 flink 配置</span>
+$ vim conf/flink-conf.yaml 
+<span style="color:#75715e">### 修改</span>
+&gt; jobmanager.rpc.address: s220.flink.learn.wx
+&gt; taskmanager.numberOfTaskSlots: <span style="color:#ae81ff">4</span>
+<span style="color:#75715e">### 新增 ssh 端口配置</span>
+&gt; env.ssh.opts: -p <span style="color:#ae81ff">2208</span>
+
+<span style="color:#75715e"># 非 HA 模式下无需配置</span>
+<span style="color:#75715e"># $ vim conf/masters</span>
+<span style="color:#75715e"># &gt; s220.flink.learn.wx:8081</span>
+
+<span style="color:#75715e"># TaskManager 机器列表</span>
+$ vim conf/workers 
+&gt; s221.flink.learn.wx
+&gt; s222.flink.learn.wx
+</code></pre></div><h2 id="分发程序">分发程序</h2>
+<blockquote>
+<p>【注意】以下操作全在 <code>s220.flink.learn.wx</code> 执行</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Copy 到 s221.flink.learn.wx</span>
+$ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/
+<span style="color:#75715e"># Copy 到 s222.flink.learn.wx</span>
+$ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/
+
+<span style="color:#75715e"># 后续如有文件变更，可单独拷贝</span>
+$ scp -r -P2208               /opt/websuite/flink-1.11.1/conf/flink-conf.yaml <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    flink@s222.flink.learn.wx:/opt/websuite/flink-1.11.1/conf/flink-conf.yaml
+</code></pre></div><h2 id="启动集群">启动集群</h2>
+<blockquote>
+<p>【注意】以下操作全在 <code>s220.flink.learn.wx</code> 执行</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd /opt/websuite/flink-1.11.1
+
+<span style="color:#75715e"># 启动集群</span>
+$ ./bin/start-cluster.sh 
+Starting cluster.
+Starting standalonesession daemon on host s220.dev.learn.ttp.wx.
+Starting taskexecutor daemon on host s221.dev.learn.ttp.wx.
+Starting taskexecutor daemon on host s222.dev.learn.ttp.wx.
+
+<span style="color:#75715e"># 关闭集群</span>
+$ ./bin/stop-cluster.sh 
+No taskexecutor daemon <span style="color:#f92672">(</span>pid: 21865<span style="color:#f92672">)</span> is running anymore on s221.dev.learn.ttp.wx.
+No taskexecutor daemon <span style="color:#f92672">(</span>pid: 25712<span style="color:#f92672">)</span> is running anymore on s222.dev.learn.ttp.wx.
+Stopping standalonesession daemon <span style="color:#f92672">(</span>pid: 7160<span style="color:#f92672">)</span> on host s220.dev.learn.ttp.wx.
+</code></pre></div><h2 id="faq">FAQ</h2>
+<h3 id="could-not-get-jvm-parameters-and-dynamic-configurations-properly">Could not get JVM parameters and dynamic configurations properly.</h3>
+<p>检查 <code>$JAVA_HOME</code>  对应的 JDK 版本是否是 <code>1.8.x+</code> ， <code>echo $JAVA_HOME</code> 查看环境变量</p>
+<h2 id="read-more">Read More</h2>
+<ul>
+<li>
+  <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/ops/deployment/cluster_setup.html">Standalone Cluster</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/edit/master/HuGo/content/docs/Opt/Install-By-Standalone-Cluster.md" target="_blank" rel="noopener">
+      <img src="/Flink/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#standalone-集群方式">Standalone 集群方式</a>
+      <ul>
+        <li><a href="#环境准备">环境准备</a></li>
+        <li><a href="#集群节点">集群节点</a></li>
+        <li><a href="#创建-flink-用户">创建 flink 用户</a></li>
+        <li><a href="#ssh-免密配置">ssh 免密配置</a></li>
+        <li><a href="#flink-非-ha-配置">flink 非 HA 配置</a></li>
+        <li><a href="#分发程序">分发程序</a></li>
+        <li><a href="#启动集群">启动集群</a></li>
+        <li><a href="#faq">FAQ</a>
+          <ul>
+            <li><a href="#could-not-get-jvm-parameters-and-dynamic-configurations-properly">Could not get JVM parameters and dynamic configurations properly.</a></li>
+          </ul>
+        </li>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

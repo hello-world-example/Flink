@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Word Count 示例程序 示例代码    SocketWindowWordCount.java   package org.apache.flink.streaming.examples.socket; import org.apache.flink.api.common.functions.FlatMapFunction; import org.apache.flink.api.common.functions.ReduceFunction; import org.apache.flink.api.java.utils.ParameterTool; import org.apache.flink.streaming.api.datastream.DataStream; import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment; import org.apache.flink.streaming.api.windowing.time.Time; import org.apache.flink.util.Collector; /** * Implements a streaming windowed version of the &#34;WordCount&#34; program. * * &lt;p&gt;This program connects to a server socket and reads strings from the socket. * The easiest way to try this out is to open a text server (at port 12345) * using the &lt;i&gt;netcat&lt;/i&gt; tool via * &lt;pre&gt; * nc -l 12345 * &lt;/pre&gt; * and run this example with the hostname and the port as arguments."><meta property="og:title" content="" />
-<meta property="og:description" content="Word Count 示例程序 示例代码    SocketWindowWordCount.java   package org.apache.flink.streaming.examples.socket; import org.apache.flink.api.common.functions.FlatMapFunction; import org.apache.flink.api.common.functions.ReduceFunction; import org.apache.flink.api.java.utils.ParameterTool; import org.apache.flink.streaming.api.datastream.DataStream; import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment; import org.apache.flink.streaming.api.windowing.time.Time; import org.apache.flink.util.Collector; /** * Implements a streaming windowed version of the &#34;WordCount&#34; program. * * &lt;p&gt;This program connects to a server socket and reads strings from the socket. * The easiest way to try this out is to open a text server (at port 12345) * using the &lt;i&gt;netcat&lt;/i&gt; tool via * &lt;pre&gt; * nc -l 12345 * &lt;/pre&gt; * and run this example with the hostname and the port as arguments." />
+<meta name="description" content="Word Count 示例程序 Maven 依赖 &lt;dependency&gt; &lt;groupId&gt;org.apache.flink&lt;/groupId&gt; &lt;artifactId&gt;flink-java&lt;/artifactId&gt; &lt;/dependency&gt; 示例代码    SocketWindowWordCount.java   package org.apache.flink.streaming.examples.socket; import org.apache.flink.api.common.functions.FlatMapFunction; import org.apache.flink.api.common.functions.ReduceFunction; import org.apache.flink.api.java.utils.ParameterTool; import org.apache.flink.streaming.api.datastream.DataStream; import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment; import org.apache.flink.streaming.api.windowing.time.Time; import org.apache.flink.util.Collector; /** * Implements a streaming windowed version of the &#34;WordCount&#34; program. * * &lt;p&gt;This program connects to a server socket and reads strings from the socket. * The easiest way to try this out is to open a text server (at port 12345) * using the &lt;i&gt;netcat&lt;/i&gt; tool via * &lt;pre&gt; * nc -l 12345 * &lt;/pre&gt; * and run this example with the hostname and the port as arguments."><meta property="og:title" content="" />
+<meta property="og:description" content="Word Count 示例程序 Maven 依赖 &lt;dependency&gt; &lt;groupId&gt;org.apache.flink&lt;/groupId&gt; &lt;artifactId&gt;flink-java&lt;/artifactId&gt; &lt;/dependency&gt; 示例代码    SocketWindowWordCount.java   package org.apache.flink.streaming.examples.socket; import org.apache.flink.api.common.functions.FlatMapFunction; import org.apache.flink.api.common.functions.ReduceFunction; import org.apache.flink.api.java.utils.ParameterTool; import org.apache.flink.streaming.api.datastream.DataStream; import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment; import org.apache.flink.streaming.api.windowing.time.Time; import org.apache.flink.util.Collector; /** * Implements a streaming windowed version of the &#34;WordCount&#34; program. * * &lt;p&gt;This program connects to a server socket and reads strings from the socket. * The easiest way to try this out is to open a text server (at port 12345) * using the &lt;i&gt;netcat&lt;/i&gt; tool via * &lt;pre&gt; * nc -l 12345 * &lt;/pre&gt; * and run this example with the hostname and the port as arguments." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Example/hello-word-count/" />
 <meta property="article:modified_time" content="2020-07-21T18:50:46+08:00" />
@@ -47,28 +47,35 @@ https://github.com/alex-shpak/hugo-book
 
 
   <ul>
-<li>
-<p><strong>Quick-Start</strong></p>
+<li><strong>Quick-Start</strong>
 <ul>
 <li>
-  <a href="/Flink/docs/Quick-Start/standalone-install/">Standalone 安装</a></li>
+  <a href="/Flink/docs/Quick-Start/Install-By-Local/">Local 快速安装</a></li>
 <li>
-  <a href="/Flink/docs/Quick-Start/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
+  <a href="/Flink/docs/Quick-Start/Docker-Flink/">Docker 方式安装</a></li>
+</ul>
+</li>
+<li><strong>Opt</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-Cluster/">Standalone 集群方式</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-HA/">Standalone HA 部署</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
 </ul>
 </li>
 <li>
-<p>
-  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></p>
-</li>
-<li>
-<p><strong>Example</strong></p>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
+<li><strong>Example</strong>
 <ul>
 <li>
   <a href="/Flink/docs/Example/hello-word-count/"class=active>Word Count 示例程序</a></li>
 </ul>
 </li>
 <li>
-<p><strong>Tutorial</strong></p>
+  <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a></li>
+<li><strong>Tutorial</strong>
 <ul>
 <li>
   <a href="/Flink/docs/Tutorial/Ververica/">Ververica</a></li>
@@ -120,6 +127,7 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li><a href="#word-count-示例程序">Word Count 示例程序</a>
       <ul>
+        <li><a href="#maven-依赖">Maven 依赖</a></li>
         <li><a href="#示例代码">示例代码</a></li>
         <li><a href="#启动-netcat-本地服务">启动 netcat 本地服务</a></li>
         <li><a href="#启动-socketwindowwordcount-程序">启动 SocketWindowWordCount 程序</a></li>
@@ -144,7 +152,12 @@ https://github.com/alex-shpak/hugo-book
       
       
   <article class="markdown"><h1 id="word-count-示例程序">Word Count 示例程序</h1>
-<h2 id="示例代码">示例代码</h2>
+<h2 id="maven-依赖">Maven 依赖</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;dependency&gt;</span>
+  <span style="color:#f92672">&lt;groupId&gt;</span>org.apache.flink<span style="color:#f92672">&lt;/groupId&gt;</span>
+  <span style="color:#f92672">&lt;artifactId&gt;</span>flink-java<span style="color:#f92672">&lt;/artifactId&gt;</span>
+<span style="color:#f92672">&lt;/dependency&gt;</span>
+</code></pre></div><h2 id="示例代码">示例代码</h2>
 <blockquote>
 <ul>
 <li>
@@ -336,6 +349,7 @@ $ ./bin/flink run examples/streaming/SocketWindowWordCount.jar --port <span styl
   <ul>
     <li><a href="#word-count-示例程序">Word Count 示例程序</a>
       <ul>
+        <li><a href="#maven-依赖">Maven 依赖</a></li>
         <li><a href="#示例代码">示例代码</a></li>
         <li><a href="#启动-netcat-本地服务">启动 netcat 本地服务</a></li>
         <li><a href="#启动-socketwindowwordcount-程序">启动 SocketWindowWordCount 程序</a></li>

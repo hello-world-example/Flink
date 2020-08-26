@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Standalone HA 部署  请先参考 Standalone 集群方式， HA 的部署基于此
+ 概述  Standalone 独立集群部署方式，默认只有一个 JobManager 如果这个 JobManager 挂掉，则 无法提交程序，程序也会报错 Flink 的 HA 模式是 保证 JobManager 的高可用，多个 JobManager 做主备，一个挂掉之后，备机可以及时顶上 主备 JobManager 通过 Zookeeper 实现 依赖  Hadoop HDFS Zookeeper（可内置）    HDFS 搭建  参考： Hadoop 快速搭建
+ ??? 启用 内嵌 Zookeeper  【注意】以下操作全在 s220.flink.learn.wx 执行
+ $ vim conf/zoo.cfg # ZooKeeper quorum peers server.0=s220.flink.learn.wx:2888:3888 server.1=s221.flink.learn.wx:2888:3888 server.2=s222.flink.learn.wx:2888:3888 # server.2=host:peer-port:leader-port # 分发 zoo 配置文件 $ scp -r -P2208 /opt/websuite/flink-1."><meta property="og:title" content="" />
+<meta property="og:description" content="Standalone HA 部署  请先参考 Standalone 集群方式， HA 的部署基于此
+ 概述  Standalone 独立集群部署方式，默认只有一个 JobManager 如果这个 JobManager 挂掉，则 无法提交程序，程序也会报错 Flink 的 HA 模式是 保证 JobManager 的高可用，多个 JobManager 做主备，一个挂掉之后，备机可以及时顶上 主备 JobManager 通过 Zookeeper 实现 依赖  Hadoop HDFS Zookeeper（可内置）    HDFS 搭建  参考： Hadoop 快速搭建
+ ??? 启用 内嵌 Zookeeper  【注意】以下操作全在 s220.flink.learn.wx 执行
+ $ vim conf/zoo.cfg # ZooKeeper quorum peers server.0=s220.flink.learn.wx:2888:3888 server.1=s221.flink.learn.wx:2888:3888 server.2=s222.flink.learn.wx:2888:3888 # server.2=host:peer-port:leader-port # 分发 zoo 配置文件 $ scp -r -P2208 /opt/websuite/flink-1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Opt/Install-By-Standalone-HA/" />
+
+<title>Install by Standalone H A | Flink</title>
+<link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/Flink/book.min.d436f463c9471cfab26a8b71cd2f50b6abf5225806391453da4ca111d1834fef.css" integrity="sha256-1Db0Y8lHHPqyaotxzS9Qtqv1IlgGORRT2kyhEdGDT&#43;8=">
+
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/Flink"><span>Flink</span>
+  </a>
+</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li><strong>Quick-Start</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Quick-Start/Install-By-Local/">Local 快速安装</a></li>
+<li>
+  <a href="/Flink/docs/Quick-Start/Docker-Flink/">Docker 方式安装</a></li>
+</ul>
+</li>
+<li><strong>Opt</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-Cluster/">Standalone 集群方式</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-HA/"class=active>Standalone HA 部署</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
+</ul>
+</li>
+<li>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
+<li><strong>Example</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
+</ul>
+</li>
+<li>
+  <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a></li>
+<li><strong>Tutorial</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Tutorial/Ververica/">Ververica</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/Flink/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Install by Standalone H A</strong>
+
+  <label for="toc-control">
+    <img src="/Flink/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#standalone-ha-部署">Standalone HA 部署</a>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#hdfs-搭建">HDFS 搭建</a></li>
+        <li><a href="#-启用-内嵌-zookeeper">??? 启用 内嵌 Zookeeper</a></li>
+        <li><a href="#新增-standby-节点">新增 Standby 节点</a></li>
+        <li><a href="#配置-confmasters">配置 conf/masters</a></li>
+        <li><a href="#开启-ha">开启 HA</a></li>
+        <li><a href="#分发与启动">分发与启动</a></li>
+        <li><a href="#ha-失败恢复测试">HA 失败恢复测试</a></li>
+        <li><a href="#faq">FAQ</a>
+          <ul>
+            <li><a href="#unsupportedfilesystemschemeexception-hadoop-is-not-in-the-classpathdependencies">UnsupportedFileSystemSchemeException: Hadoop is not in the classpath/dependencies</a></li>
+            <li><a href="#permission-denied-userflink-accesswrite">Permission denied: user=flink, access=WRITE</a></li>
+            <li><a href="#javaionotserializableexception-orgapacheflinkruntimerestmessagesresourceprofileinfo">java.io.NotSerializableException: org.apache.flink.runtime.rest.messages.ResourceProfileInfo</a></li>
+          </ul>
+        </li>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="standalone-ha-部署">Standalone HA 部署</h1>
+<blockquote>
+<p>请先参考 
+  <a href="/Flink/docs/Opt/Install-By-Standalone-Cluster/">Standalone 集群方式</a>， HA 的部署基于此</p>
+</blockquote>
+<h2 id="概述">概述</h2>
+<ul>
+<li>Standalone 独立集群部署方式，默认只有一个 JobManager</li>
+<li>如果这个 JobManager 挂掉，则 无法提交程序，程序也会报错</li>
+<li>Flink 的 HA 模式是 保证 JobManager 的高可用，<strong>多个 JobManager 做主备</strong>，一个挂掉之后，备机可以及时顶上</li>
+<li>主备 JobManager 通过 Zookeeper 实现</li>
+<li>依赖
+<ul>
+<li>Hadoop HDFS</li>
+<li>Zookeeper（可内置）</li>
+</ul>
+</li>
+</ul>
+<h2 id="hdfs-搭建">HDFS 搭建</h2>
+<blockquote>
+<p>参考： 
+  <a href="/Hadoop/docs/Quick-Start/Install-by-Docker/">Hadoop 快速搭建</a></p>
+</blockquote>
+<h2 id="-启用-内嵌-zookeeper">??? 启用 内嵌 Zookeeper</h2>
+<blockquote>
+<p>【注意】以下操作全在 <code>s220.flink.learn.wx</code> 执行</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim conf/zoo.cfg
+<span style="color:#75715e"># ZooKeeper quorum peers</span>
+server.0<span style="color:#f92672">=</span>s220.flink.learn.wx:2888:3888
+server.1<span style="color:#f92672">=</span>s221.flink.learn.wx:2888:3888
+server.2<span style="color:#f92672">=</span>s222.flink.learn.wx:2888:3888
+<span style="color:#75715e"># server.2=host:peer-port:leader-port</span>
+
+<span style="color:#75715e"># 分发 zoo 配置文件</span>
+$ scp -r -P2208 /opt/websuite/flink-1.11.1/conf/zoo.cfg flink@s221.flink.learn.wx:/opt/websuite/flink-1.11.1/conf/zoo.cfg
+$ scp -r -P2208 /opt/websuite/flink-1.11.1/conf/zoo.cfg flink@s222.flink.learn.wx:/opt/websuite/flink-1.11.1/conf/zoo.cfg
+
+
+<span style="color:#75715e"># 启动 Zookeeper 集群（）</span>
+$ bin/start-zookeeper-quorum.sh
+
+<span style="color:#75715e"># 查看日志</span>
+$ tail -fn <span style="color:#ae81ff">400</span> log/flink-flink-zookeeper-*
+
+<span style="color:#75715e"># 停止 Zookeeper 集群</span>
+<span style="color:#75715e"># $ bin/stop-zookeeper-quorum.sh</span>
+</code></pre></div><h2 id="新增-standby-节点">新增 Standby 节点</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim /etc/hosts
+<span style="color:#75715e"># 现有</span>
+172.16.2.220    s220.flink.learn.wx     <span style="color:#75715e"># JobManager-Master</span>
+172.16.2.221    s221.flink.learn.wx     <span style="color:#75715e"># TaskManager</span>
+172.16.2.222    s222.flink.learn.wx     <span style="color:#75715e"># TaskManager</span>
+<span style="color:#75715e"># 新增</span> 
+172.16.2.223    s223.flink.learn.wx     <span style="color:#75715e"># JobManager-Standby</span>
+
+
+<span style="color:#75715e"># 配置免密登陆，</span>
+</code></pre></div><h2 id="配置-confmasters">配置 conf/masters</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim conf/masters
+s220.flink.learn.wx:8081
+s223.flink.learn.wx:8081
+</code></pre></div><h2 id="开启-ha">开启 HA</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim conf/flink-conf.yaml
+
+high-availability: zookeeper
+
+<span style="color:#75715e"># 需要手动添加 Hadoop jar 包依赖，详见 FAQ</span>
+high-availability.storageDir: hdfs://172.16.2.108/flink/ha/
+
+<span style="color:#75715e"># 这里无需配置 chroot: zk:2181/flink</span>
+high-availability.zookeeper.quorum: 172.16.2.183:2181
+
+<span style="color:#75715e"># Flink 的 znode 默认是 /{zookeeper.path.root:flink}/{cluster-id:default}/xxx</span>
+<span style="color:#75715e"># zookeeper.path.root 控制一级目录，默认 flink</span>
+high-availability.zookeeper.path.root: /flink
+<span style="color:#75715e"># cluster-id 控制二级目录，默认 default，【同时控制 HDFS 和 Zookeeper Path 】</span>
+high-availability.cluster-id: /cluster_learn
+</code></pre></div><h2 id="分发与启动">分发与启动</h2>
+<blockquote>
+<p>【注意】以下操作全在 <code>s220.flink.learn.wx</code> 执行</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Copy 到 s223.flink.learn.wx</span>
+$ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s223.flink.learn.wx:/opt/websuite/
+<span style="color:#75715e"># Copy 到 s221.flink.learn.wx</span>
+$ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/
+<span style="color:#75715e"># Copy 到 s222.flink.learn.wx</span>
+$ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/
+
+<span style="color:#75715e"># 启动集群</span>
+$ ./bin/start-cluster.sh
+
+<span style="color:#75715e"># 这时访问 http://s223.flink.learn.wx:8081</span> 
+<span style="color:#75715e"># 和      http://s220.flink.learn.wx:8081  都可以访问</span>
+</code></pre></div><h2 id="ha-失败恢复测试">HA 失败恢复测试</h2>
+<ul>
+<li>如何确定 Master 实例
+<ul>
+<li>打开 <a href="http://s220.flink.learn.wx">http://s220.flink.learn.wx</a>:8081/#/job-manager/config</li>
+<li><strong>jobmanager.rpc.address</strong> 对应的地址即 Master 实例</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 假如 当前 Master 实例是 s220.flink.learn.wx， 则登陆该机器</span>
+
+<span style="color:#75715e"># 关闭 master 节点</span>
+$ ./bin/jobmanager.sh stop
+
+<span style="color:#75715e"># 启动节点</span>
+$ ./bin/jobmanager.sh start
+<span style="color:#75715e"># 刚开始会报选举的错误，之后会恢复正常</span>
+<span style="color:#f92672">{</span><span style="color:#e6db74">&#34;errors&#34;</span>:<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;Service temporarily unavailable due to an ongoing leader election. Please refresh.&#34;</span><span style="color:#f92672">]}</span>
+</code></pre></div><h2 id="faq">FAQ</h2>
+<h3 id="unsupportedfilesystemschemeexception-hadoop-is-not-in-the-classpathdependencies">UnsupportedFileSystemSchemeException: Hadoop is not in the classpath/dependencies</h3>
+<ul>
+<li>到 <a href="https://repo.maven.apache.org/maven2/org/apache/flink/flink-shaded-hadoop-2-uber/">https://repo.maven.apache.org/maven2/org/apache/flink/flink-shaded-hadoop-2-uber/</a> 找到对应的版本</li>
+<li>这里选择 <code>flink-shaded-hadoop-2-uber-2.8.3-10.0.jar</code></li>
+<li>下载后，拷贝到 <code>./lib/</code> 目录下，然后重启</li>
+</ul>
+<h3 id="permission-denied-userflink-accesswrite">Permission denied: user=flink, access=WRITE</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo su - hdfs
+$ hadoop fs -mkdir /flink   
+$ hadoop fs -chown flink:flink /flink
+$ hadoop fs -ls / | grep flink
+drwxr-xr-x   - flink flink               <span style="color:#ae81ff">0</span> 2020-08-26 15:21 /flink
+</code></pre></div><h3 id="javaionotserializableexception-orgapacheflinkruntimerestmessagesresourceprofileinfo">java.io.NotSerializableException: org.apache.flink.runtime.rest.messages.ResourceProfileInfo</h3>
+<ul>
+<li>1.11.1 版本的 Bug</li>
+<li>@see <a href="https://github.com/apache/flink/pull/12991">https://github.com/apache/flink/pull/12991</a></li>
+<li>@see <a href="http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/NotSerializableException-org-apache-flink-runtime-rest-messages-ResourceProfileInfo-td36860.html">http://apache-flink-user-mailing-list-archive.2336050.n4.nabble.com/NotSerializableException-org-apache-flink-runtime-rest-messages-ResourceProfileInfo-td36860.html</a></li>
+</ul>
+<h2 id="read-more">Read More</h2>
+<ul>
+<li>
+  <a href="https://ci.apache.org/projects/flink/flink-docs-release-1.11/ops/jobmanager_high_availability.html">JobManager High Availability (HA)</a></li>
+<li>
+  <a href="https://www.cnblogs.com/liugh/p/7482571.html">Flink JobManager HA模式部署（基于Standalone）</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/edit/master/HuGo/content/docs/Opt/Install-By-Standalone-HA.md" target="_blank" rel="noopener">
+      <img src="/Flink/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#standalone-ha-部署">Standalone HA 部署</a>
+      <ul>
+        <li><a href="#概述">概述</a></li>
+        <li><a href="#hdfs-搭建">HDFS 搭建</a></li>
+        <li><a href="#-启用-内嵌-zookeeper">??? 启用 内嵌 Zookeeper</a></li>
+        <li><a href="#新增-standby-节点">新增 Standby 节点</a></li>
+        <li><a href="#配置-confmasters">配置 conf/masters</a></li>
+        <li><a href="#开启-ha">开启 HA</a></li>
+        <li><a href="#分发与启动">分发与启动</a></li>
+        <li><a href="#ha-失败恢复测试">HA 失败恢复测试</a></li>
+        <li><a href="#faq">FAQ</a>
+          <ul>
+            <li><a href="#unsupportedfilesystemschemeexception-hadoop-is-not-in-the-classpathdependencies">UnsupportedFileSystemSchemeException: Hadoop is not in the classpath/dependencies</a></li>
+            <li><a href="#permission-denied-userflink-accesswrite">Permission denied: user=flink, access=WRITE</a></li>
+            <li><a href="#javaionotserializableexception-orgapacheflinkruntimerestmessagesresourceprofileinfo">java.io.NotSerializableException: org.apache.flink.runtime.rest.messages.ResourceProfileInfo</a></li>
+          </ul>
+        </li>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

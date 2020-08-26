@@ -4,31 +4,37 @@
   
   <url>
     <loc>https://hello-world-example.github.io/Flink/_sidebar/</loc>
-    <lastmod>2020-07-21T18:50:46+08:00</lastmod>
+    <lastmod>2020-07-27T09:40:51+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hello-world-example.github.io/Flink/docs/Cli/sql-client/</loc>
+    <lastmod>2020-07-27T09:40:51+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hello-world-example.github.io/Flink/docs/Connectors/DataSet-Connectors/</loc>
+    <lastmod>2020-07-27T09:40:51+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hello-world-example.github.io/Flink/docs/Connectors/DataStream-Connectors/</loc>
+    <lastmod>2020-07-27T09:40:51+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hello-world-example.github.io/Flink/docs/Connectors/RichSinkFunction/</loc>
+    <lastmod>2020-07-27T09:40:51+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hello-world-example.github.io/Flink/docs/Connectors/RichSourceFunction/</loc>
+    <lastmod>2020-07-27T09:40:51+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hello-world-example.github.io/Flink/docs/Connectors/Table-SQL-Connectors/</loc>
+    <lastmod>2020-07-27T09:40:51+08:00</lastmod>
   </url>
   
   <url>
@@ -37,16 +43,28 @@
   </url>
   
   <url>
+    <loc>https://hello-world-example.github.io/Flink/docs/FAQ/</loc>
+  </url>
+  
+  <url>
     <loc>https://hello-world-example.github.io/Flink/docs/Internals/Environment/</loc>
+    <lastmod>2020-07-27T09:40:51+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://hello-world-example.github.io/Flink/docs/Opt/Flink-Conf.yaml/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hello-world-example.github.io/Flink/docs/Opt/Install-By-Standalone-Cluster/</loc>
+  </url>
+  
+  <url>
+    <loc>https://hello-world-example.github.io/Flink/docs/Opt/Install-By-Standalone-HA/</loc>
   </url>
   
   <url>
     <loc>https://hello-world-example.github.io/Flink/docs/Quick-Start/Docker-Flink/</loc>
-    <lastmod>2020-07-21T18:50:46+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://hello-world-example.github.io/Flink/docs/Quick-Start/Flink-Conf.yaml/</loc>
     <lastmod>2020-07-21T18:50:46+08:00</lastmod>
   </url>
   
@@ -56,8 +74,7 @@
   </url>
   
   <url>
-    <loc>https://hello-world-example.github.io/Flink/docs/Quick-Start/standalone-install/</loc>
-    <lastmod>2020-07-21T18:50:46+08:00</lastmod>
+    <loc>https://hello-world-example.github.io/Flink/docs/Quick-Start/Install-By-Local/</loc>
   </url>
   
   <url>
@@ -76,12 +93,12 @@
   
   <url>
     <loc>https://hello-world-example.github.io/Flink/docs/</loc>
-    <lastmod>2020-07-21T18:50:46+08:00</lastmod>
+    <lastmod>2020-07-27T09:40:51+08:00</lastmod>
   </url>
   
   <url>
     <loc>https://hello-world-example.github.io/Flink/</loc>
-    <lastmod>2020-07-21T18:50:46+08:00</lastmod>
+    <lastmod>2020-07-27T09:40:51+08:00</lastmod>
   </url>
   
   <url>

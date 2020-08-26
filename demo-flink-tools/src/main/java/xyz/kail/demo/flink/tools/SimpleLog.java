@@ -9,7 +9,7 @@ public class SimpleLog {
     }
 
     public static void init() {
-        System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "INFO");
+        System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "WARN");
         System.setProperty(SimpleLogger.LOG_FILE_KEY, "System.out");
     }
 }
