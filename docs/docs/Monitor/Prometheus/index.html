@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Flink Prometheus 开启 PrometheusReporter $ vim conf/flink-conf.yaml metrics.reporters: prom metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter metrics.reporter.prom.port: 9999 # 删除日志 $ rm -rf log/* # 分发配置 $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s223.flink.learn.wx:/opt/websuite/ # 启动集群 $ ./bin/start-cluster.sh # 查看 暴露的 Prometheus 指标 $ curl http://s220.flink.learn.wx:9999 $ curl http://s221.flink.learn.wx:9999 配置 Prometheus  安装 Prometheus ：略
+ # 增加以下配置并重启 $ vim prometheus.yml scrape_configs: - job_name: &#39;flink_learn_cluster&#39; static_configs: - targets: - s220."><meta property="og:title" content="" />
+<meta property="og:description" content="Flink Prometheus 开启 PrometheusReporter $ vim conf/flink-conf.yaml metrics.reporters: prom metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter metrics.reporter.prom.port: 9999 # 删除日志 $ rm -rf log/* # 分发配置 $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s223.flink.learn.wx:/opt/websuite/ # 启动集群 $ ./bin/start-cluster.sh # 查看 暴露的 Prometheus 指标 $ curl http://s220.flink.learn.wx:9999 $ curl http://s221.flink.learn.wx:9999 配置 Prometheus  安装 Prometheus ：略
+ # 增加以下配置并重启 $ vim prometheus.yml scrape_configs: - job_name: &#39;flink_learn_cluster&#39; static_configs: - targets: - s220." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Monitor/Prometheus/" />
+
+<title>Prometheus | Flink</title>
+<link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/Flink/book.min.d436f463c9471cfab26a8b71cd2f50b6abf5225806391453da4ca111d1834fef.css" integrity="sha256-1Db0Y8lHHPqyaotxzS9Qtqv1IlgGORRT2kyhEdGDT&#43;8=">
+
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/Flink"><span>Flink</span>
+  </a>
+</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li><strong>Quick-Start</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Quick-Start/Install-By-Local/">Local 快速安装</a></li>
+<li>
+  <a href="/Flink/docs/Quick-Start/Docker-Flink/">Docker 方式安装</a></li>
+<li>
+  <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
+</ul>
+</li>
+<li><strong>Opt</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-Cluster/">Standalone 集群方式</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-HA/">Standalone HA 部署</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
+</ul>
+</li>
+<li><strong>Monitor</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Monitor/Prometheus/"class=active>Flink Prometheus</a></li>
+</ul>
+</li>
+<li>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
+<li>
+  <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a></li>
+<li><strong>Tutorial</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Tutorial/Ververica/">Ververica</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/Flink/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Prometheus</strong>
+
+  <label for="toc-control">
+    <img src="/Flink/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#flink-prometheus">Flink Prometheus</a>
+      <ul>
+        <li><a href="#开启-prometheusreporter">开启 PrometheusReporter</a></li>
+        <li><a href="#配置-prometheus">配置 Prometheus</a></li>
+        <li><a href="#配置-grafana-报表">配置 Grafana 报表</a></li>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="flink-prometheus">Flink Prometheus</h1>
+<h2 id="开启-prometheusreporter">开启 PrometheusReporter</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim conf/flink-conf.yaml 
+metrics.reporters: prom
+metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter
+metrics.reporter.prom.port: <span style="color:#ae81ff">9999</span>
+ 
+
+<span style="color:#75715e"># 删除日志</span>
+$ rm -rf log/*
+<span style="color:#75715e"># 分发配置</span>
+$ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/
+$ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/
+$ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s223.flink.learn.wx:/opt/websuite/
+
+<span style="color:#75715e"># 启动集群</span>
+$ ./bin/start-cluster.sh
+
+<span style="color:#75715e"># 查看 暴露的 Prometheus 指标</span>
+$ curl http://s220.flink.learn.wx:9999
+$ curl http://s221.flink.learn.wx:9999
+</code></pre></div><h2 id="配置-prometheus">配置 Prometheus</h2>
+<blockquote>
+<p>安装 Prometheus ：略</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># 增加以下配置并重启</span>
+$ vim prometheus.yml 
+
+<span style="color:#66d9ef">scrape_configs</span>:
+  - <span style="color:#66d9ef">job_name</span>: <span style="color:#e6db74">&#39;flink_learn_cluster&#39;</span>
+    <span style="color:#66d9ef">static_configs</span>:
+    - <span style="color:#66d9ef">targets</span>:
+      - s220.flink.learn.wx:<span style="color:#ae81ff">9999</span>
+      - s221.flink.learn.wx:<span style="color:#ae81ff">9999</span>
+      - s222.flink.learn.wx:<span style="color:#ae81ff">9999</span>
+      - s223.flink.learn.wx:<span style="color:#ae81ff">9999</span>
+</code></pre></div><h2 id="配置-grafana-报表">配置 Grafana 报表</h2>
+<blockquote>
+<ul>
+<li>安装 Grafana ：略</li>
+<li>导入 Dashboard <a href="https://grafana.com/grafana/dashboards/11049">https://grafana.com/grafana/dashboards/11049</a></li>
+</ul>
+</blockquote>
+<h2 id="read-more">Read More</h2>
+<ul>
+<li>
+<p>
+  <a href="https://ververica.cn/developers/flink-and-prometheus/">Flink 和 Prometheus：流式应用程序的云原生监控</a></p>
+</li>
+<li>
+<p>
+  <a href="https://flink.apache.org/features/2019/03/11/prometheus-monitoring.html">Flink and Prometheus: Cloud-native monitoring of streaming applications</a></p>
+</li>
+<li>
+<p>
+  <a href="https://ci.apache.org/projects/flink/flink-docs-stable/monitoring/metrics.html#prometheus-orgapacheflinkmetricsprometheusprometheusreporter">Prometheus (org.apache.flink.metrics.prometheus.PrometheusReporter)</a></p>
+</li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/edit/master/HuGo/content/docs/Monitor/Prometheus.md" target="_blank" rel="noopener">
+      <img src="/Flink/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#flink-prometheus">Flink Prometheus</a>
+      <ul>
+        <li><a href="#开启-prometheusreporter">开启 PrometheusReporter</a></li>
+        <li><a href="#配置-prometheus">配置 Prometheus</a></li>
+        <li><a href="#配置-grafana-报表">配置 Grafana 报表</a></li>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

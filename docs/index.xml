@@ -15,7 +15,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hello-world-example.github.io/Flink/_sidebar/</guid>
-      <description> Quick-Start   Local 快速安装  Docker 方式安装   Opt   Standalone 集群方式  Standalone HA 部署  flink-conf.yaml 配置    获取 Github 源码 Example   Word Count 示例程序    FAQ.. Tutorial   Ververica    </description>
+      <description> Quick-Start   Local 快速安装  Docker 方式安装  Word Count 示例程序   Opt   Standalone 集群方式  Standalone HA 部署  flink-conf.yaml 配置   Monitor   Flink Prometheus    获取 Github 源码  FAQ.. Tutorial   Ververica    </description>
     </item>
     
     <item>
@@ -88,6 +88,16 @@
       
       <guid>https://hello-world-example.github.io/Flink/docs/Internals/Environment/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Monitor/Prometheus/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Monitor/Prometheus/</guid>
+      <description>Flink Prometheus 开启 PrometheusReporter $ vim conf/flink-conf.yaml metrics.reporters: prom metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter metrics.reporter.prom.port: 9999 # 删除日志 $ rm -rf log/* # 分发配置 $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s223.flink.learn.wx:/opt/websuite/ # 启动集群 $ ./bin/start-cluster.sh # 查看 暴露的 Prometheus 指标 $ curl http://s220.flink.learn.wx:9999 $ curl http://s221.flink.learn.wx:9999 配置 Prometheus  安装 Prometheus ：略
+ # 增加以下配置并重启 $ vim prometheus.yml scrape_configs: - job_name: &amp;#39;flink_learn_cluster&amp;#39; static_configs: - targets: - s220.</description>
     </item>
     
     <item>

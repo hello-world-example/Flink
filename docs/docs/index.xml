@@ -83,6 +83,16 @@
     
     <item>
       <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Monitor/Prometheus/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Monitor/Prometheus/</guid>
+      <description>Flink Prometheus 开启 PrometheusReporter $ vim conf/flink-conf.yaml metrics.reporters: prom metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter metrics.reporter.prom.port: 9999 # 删除日志 $ rm -rf log/* # 分发配置 $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s223.flink.learn.wx:/opt/websuite/ # 启动集群 $ ./bin/start-cluster.sh # 查看 暴露的 Prometheus 指标 $ curl http://s220.flink.learn.wx:9999 $ curl http://s221.flink.learn.wx:9999 配置 Prometheus  安装 Prometheus ：略
+ # 增加以下配置并重启 $ vim prometheus.yml scrape_configs: - job_name: &amp;#39;flink_learn_cluster&amp;#39; static_configs: - targets: - s220.</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://hello-world-example.github.io/Flink/docs/Opt/Flink-Conf.yaml/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       

@@ -8,7 +8,7 @@
 <meta property="og:description" content="Local 安装 安装 $ java -version java version &#34;1.8.0_151&#34; Java(TM) SE Runtime Environment (build 1.8.0_151-b12) Java HotSpot(TM) 64-Bit Server VM (build 25.151-b12, mixed mode) # https://flink.apache.org/downloads.html # $ cd /opt/package $ wget https://downloads.apache.org/flink/flink-1.11.1/flink-1.11.1-bin-scala_2.12.tgz $ cd /opt/websuite $ cp /opt/package/flink-1.11.1-bin-scala_2.12.tgz . $ tar zxvf flink-1.11.1-bin-scala_2.12.tgz $ rm flink-1.11.1-bin-scala_2.12.tgz # 启动 $ cd /opt/websuite/flink-1.11.1/ $ ./bin/start-cluster.sh # 启动的 Java 进程 $ jps 34240 TaskManagerRunner 33989 StandaloneSessionClusterEntrypoint # 访问 http://localhost:8081 # 启动日志 $ tail -n 400 log/flink-*-standalonesession-*log* - -------------------------------------------------------------------------------- ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Quick-Start/Install-By-Local/" />
-
+<meta property="article:modified_time" content="2020-08-26T17:23:12+08:00" />
 <title>Install by Local | Flink</title>
 <link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
 
@@ -53,6 +53,8 @@ https://github.com/alex-shpak/hugo-book
   <a href="/Flink/docs/Quick-Start/Install-By-Local/"class=active>Local 快速安装</a></li>
 <li>
   <a href="/Flink/docs/Quick-Start/Docker-Flink/">Docker 方式安装</a></li>
+<li>
+  <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
 </ul>
 </li>
 <li><strong>Opt</strong>
@@ -65,14 +67,14 @@ https://github.com/alex-shpak/hugo-book
   <a href="/Flink/docs/Opt/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
 </ul>
 </li>
-<li>
-  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
-<li><strong>Example</strong>
+<li><strong>Monitor</strong>
 <ul>
 <li>
-  <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
+  <a href="/Flink/docs/Monitor/Prometheus/">Flink Prometheus</a></li>
 </ul>
 </li>
+<li>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
 <li>
   <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a></li>
 <li><strong>Tutorial</strong>
@@ -208,6 +210,14 @@ $ tail -n <span style="color:#ae81ff">400</span> log/flink-*-standalonesession-*
   <div class="flex justify-between">
 
 
+
+  <div>
+    
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/commit/c584d1cf442fb81d75e204c061ca169720815a39" title='Last modified by kaibin.yang | Aug 26, 2020' target="_blank" rel="noopener">
+      <img src="/Flink/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>Aug 26, 2020</span>
+    </a>
+  </div>
 
 
 

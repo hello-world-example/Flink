@@ -8,7 +8,7 @@
 <meta property="og:description" content="Word Count 示例程序 Maven 依赖 &lt;dependency&gt; &lt;groupId&gt;org.apache.flink&lt;/groupId&gt; &lt;artifactId&gt;flink-java&lt;/artifactId&gt; &lt;/dependency&gt; 示例代码    SocketWindowWordCount.java   package org.apache.flink.streaming.examples.socket; import org.apache.flink.api.common.functions.FlatMapFunction; import org.apache.flink.api.common.functions.ReduceFunction; import org.apache.flink.api.java.utils.ParameterTool; import org.apache.flink.streaming.api.datastream.DataStream; import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment; import org.apache.flink.streaming.api.windowing.time.Time; import org.apache.flink.util.Collector; /** * Implements a streaming windowed version of the &#34;WordCount&#34; program. * * &lt;p&gt;This program connects to a server socket and reads strings from the socket. * The easiest way to try this out is to open a text server (at port 12345) * using the &lt;i&gt;netcat&lt;/i&gt; tool via * &lt;pre&gt; * nc -l 12345 * &lt;/pre&gt; * and run this example with the hostname and the port as arguments." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Example/hello-word-count/" />
-<meta property="article:modified_time" content="2020-07-21T18:50:46+08:00" />
+<meta property="article:modified_time" content="2020-08-26T17:23:12+08:00" />
 <title>Hello Word Count | Flink</title>
 <link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
 
@@ -53,6 +53,8 @@ https://github.com/alex-shpak/hugo-book
   <a href="/Flink/docs/Quick-Start/Install-By-Local/">Local 快速安装</a></li>
 <li>
   <a href="/Flink/docs/Quick-Start/Docker-Flink/">Docker 方式安装</a></li>
+<li>
+  <a href="/Flink/docs/Example/hello-word-count/"class=active>Word Count 示例程序</a></li>
 </ul>
 </li>
 <li><strong>Opt</strong>
@@ -65,14 +67,14 @@ https://github.com/alex-shpak/hugo-book
   <a href="/Flink/docs/Opt/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
 </ul>
 </li>
-<li>
-  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
-<li><strong>Example</strong>
+<li><strong>Monitor</strong>
 <ul>
 <li>
-  <a href="/Flink/docs/Example/hello-word-count/"class=active>Word Count 示例程序</a></li>
+  <a href="/Flink/docs/Monitor/Prometheus/">Flink Prometheus</a></li>
 </ul>
 </li>
+<li>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
 <li>
   <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a></li>
 <li><strong>Tutorial</strong>
@@ -310,9 +312,9 @@ $ ./bin/flink run examples/streaming/SocketWindowWordCount.jar --port <span styl
 
   <div>
     
-    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/commit/d03651104e3ec732d4a6741cec486e4944482a2c" title='Last modified by kaibin.yang | Jul 21, 2020' target="_blank" rel="noopener">
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/commit/c584d1cf442fb81d75e204c061ca169720815a39" title='Last modified by kaibin.yang | Aug 26, 2020' target="_blank" rel="noopener">
       <img src="/Flink/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>Jul 21, 2020</span>
+      <span>Aug 26, 2020</span>
     </a>
   </div>
 
