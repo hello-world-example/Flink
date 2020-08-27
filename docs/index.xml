@@ -15,7 +15,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hello-world-example.github.io/Flink/_sidebar/</guid>
-      <description> Quick-Start   Local 快速安装  Docker 方式安装  Word Count 示例程序   Opt   Standalone 集群方式  Standalone HA 部署  flink-conf.yaml 配置   Monitor   Flink Prometheus    获取 Github 源码  FAQ.. Tutorial   Ververica    </description>
+      <description> Quick-Start   Local 快速安装  Docker 方式安装  Word Count 示例程序   Opt   Standalone 集群方式  Standalone HA 部署  flink-conf.yaml 配置   Monitor   Flink Prometheus  REST API    获取 Github 源码  FAQ.. Tutorial   Ververica    </description>
     </item>
     
     <item>
@@ -102,6 +102,15 @@
     
     <item>
       <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Monitor/REST-API/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Monitor/REST-API/</guid>
+      <description>Monitoring REST API  在 flink-conf.yaml 通过 rest.port 配置 API 端口 REST API 和 Web UI 公用一个端口 如果无需二次开发，大部分功能可通过 Web UI 查看  Cluster    Method URI Desc     GET /config 查看配置   GET /overview 集群概况   POST /savepoint-disposal    GET /savepoint-disposal/:triggerid    DELETE /cluster 关闭集群    JobManager    Method URI Desc     GET /jobmanager/config JobManager 配置   GET /jobmanager/logs JobManager 日志文件   GET /jobmanager/metrics[?</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://hello-world-example.github.io/Flink/docs/Opt/Flink-Conf.yaml/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -164,7 +173,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hello-world-example.github.io/Flink/docs/TODO/</guid>
-      <description>TODO </description>
+      <description>TODO  自定义监控指标  </description>
     </item>
     
     <item>

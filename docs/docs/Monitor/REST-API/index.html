@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Monitoring REST API  在 flink-conf.yaml 通过 rest.port 配置 API 端口 REST API 和 Web UI 公用一个端口 如果无需二次开发，大部分功能可通过 Web UI 查看  Cluster    Method URI Desc     GET /config 查看配置   GET /overview 集群概况   POST /savepoint-disposal    GET /savepoint-disposal/:triggerid    DELETE /cluster 关闭集群    JobManager    Method URI Desc     GET /jobmanager/config JobManager 配置   GET /jobmanager/logs JobManager 日志文件   GET /jobmanager/metrics[?"><meta property="og:title" content="" />
+<meta property="og:description" content="Monitoring REST API  在 flink-conf.yaml 通过 rest.port 配置 API 端口 REST API 和 Web UI 公用一个端口 如果无需二次开发，大部分功能可通过 Web UI 查看  Cluster    Method URI Desc     GET /config 查看配置   GET /overview 集群概况   POST /savepoint-disposal    GET /savepoint-disposal/:triggerid    DELETE /cluster 关闭集群    JobManager    Method URI Desc     GET /jobmanager/config JobManager 配置   GET /jobmanager/logs JobManager 日志文件   GET /jobmanager/metrics[?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Monitor/REST-API/" />
+
+<title>R E S T a P I | Flink</title>
+<link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
+
+
+<link rel="stylesheet" href="/Flink/book.min.d436f463c9471cfab26a8b71cd2f50b6abf5225806391453da4ca111d1834fef.css" integrity="sha256-1Db0Y8lHHPqyaotxzS9Qtqv1IlgGORRT2kyhEdGDT&#43;8=">
+
+
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+</head>
+
+<body>
+  <input type="checkbox" class="hidden" id="menu-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/Flink"><span>Flink</span>
+  </a>
+</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+  <ul>
+<li><strong>Quick-Start</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Quick-Start/Install-By-Local/">Local 快速安装</a></li>
+<li>
+  <a href="/Flink/docs/Quick-Start/Docker-Flink/">Docker 方式安装</a></li>
+<li>
+  <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
+</ul>
+</li>
+<li><strong>Opt</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-Cluster/">Standalone 集群方式</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Install-By-Standalone-HA/">Standalone HA 部署</a></li>
+<li>
+  <a href="/Flink/docs/Opt/Flink-Conf.yaml/">flink-conf.yaml 配置</a></li>
+</ul>
+</li>
+<li><strong>Monitor</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Monitor/Prometheus/">Flink Prometheus</a></li>
+<li>
+  <a href="/Flink/docs/Monitor/REST-API/"class=active>REST API</a></li>
+</ul>
+</li>
+<li>
+  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
+<li>
+  <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a></li>
+<li><strong>Tutorial</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Tutorial/Ververica/">Ververica</a></li>
+</ul>
+</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var menu=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(event){localStorage.setItem("menu.scrollTop",menu.scrollTop);});menu.scrollTop=localStorage.getItem("menu.scrollTop");})();</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/Flink/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>R E S T a P I</strong>
+
+  <label for="toc-control">
+    <img src="/Flink/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+  </label>
+</div>
+
+
+  
+    <input type="checkbox" class="hidden" id="toc-control" />
+    <aside class="hidden clearfix">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#monitoring-rest-api">Monitoring REST API</a>
+      <ul>
+        <li><a href="#cluster">Cluster</a></li>
+        <li><a href="#jobmanager">JobManager</a></li>
+        <li><a href="#taskmanager">TaskManager</a></li>
+        <li><a href="#jobs">Jobs</a></li>
+        <li><a href="#jobs-vertices">Jobs Vertices</a></li>
+        <li><a href="#datasets">DataSets</a></li>
+        <li><a href="#jars">Jars</a></li>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+    </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="monitoring-rest-api">Monitoring REST API</h1>
+<ul>
+<li>在 <code>flink-conf.yaml</code> 通过 <code>rest.port</code> 配置 API 端口</li>
+<li>REST API 和 Web UI 公用一个端口</li>
+<li>如果无需二次开发，大部分功能可通过 Web UI 查看</li>
+</ul>
+<h2 id="cluster">Cluster</h2>
+<table>
+<thead>
+<tr>
+<th align="right">Method</th>
+<th>URI</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">GET</td>
+<td>/config</td>
+<td>查看配置</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/overview</td>
+<td>集群概况</td>
+</tr>
+<tr>
+<td align="right">POST</td>
+<td>/savepoint-disposal</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/savepoint-disposal/:triggerid</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">DELETE</td>
+<td>/cluster</td>
+<td>关闭集群</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jobmanager">JobManager</h2>
+<table>
+<thead>
+<tr>
+<th align="right">Method</th>
+<th>URI</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">GET</td>
+<td><strong>/jobmanager/config</strong></td>
+<td>JobManager 配置</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobmanager/logs</td>
+<td>JobManager 日志文件</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td><strong>/jobmanager/metrics[?get=,,]</strong></td>
+<td>JobManager 指标，get 参数选择指定的指标</td>
+</tr>
+</tbody>
+</table>
+<h2 id="taskmanager">TaskManager</h2>
+<table>
+<thead>
+<tr>
+<th align="right">Method</th>
+<th>URI</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">GET</td>
+<td>/taskmanagers</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/taskmanagers/metrics</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/taskmanagers/:taskmanagerid</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/taskmanagers/:taskmanagerid/logs</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/taskmanagers/:taskmanagerid/metrics</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/taskmanagers/:taskmanagerid/thread-dump</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="jobs">Jobs</h2>
+<table>
+<thead>
+<tr>
+<th align="right">Method</th>
+<th>URI</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">GET</td>
+<td>/jobs</td>
+<td>查看任务和当前状态</td>
+</tr>
+<tr>
+<td align="right">POST</td>
+<td>/jobs</td>
+<td>提交作业请求</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td><strong>/jobs/metrics[?get=&amp;agg=&amp;jobs=]</strong></td>
+<td>作业 指标</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td><strong>/jobs/overview</strong></td>
+<td>作业概况</td>
+</tr>
+<tr>
+<td align="right"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td><strong>/jobs/:jobid</strong></td>
+<td>作业详情</td>
+</tr>
+<tr>
+<td align="right">PATCH</td>
+<td>/jobs/:jobid</td>
+<td>中断 job</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td><strong>/jobs/:jobid/plan</strong></td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td><strong>/jobs/:jobid/config</strong></td>
+<td>Job 配置</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/exceptions</td>
+<td>Job 异常</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/execution-result</td>
+<td>Job 执行结果</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td><strong>/jobs/:jobid/metrics[?get=]</strong></td>
+<td>Job 指标</td>
+</tr>
+<tr>
+<td align="right">PATCH</td>
+<td>/jobs/:jobid/rescaling</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/rescaling/:triggerid</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/accumulators</td>
+<td></td>
+</tr>
+<tr>
+<td align="right"></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/checkpoints</td>
+<td>checkpoints 统计</td>
+</tr>
+<tr>
+<td align="right">POST</td>
+<td>/jobs/:jobid/savepoints</td>
+<td>触发 savepoints</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/savepoints/:triggerid</td>
+<td>获取 savepoints 状态</td>
+</tr>
+<tr>
+<td align="right">POST</td>
+<td>/jobs/:jobid/stop</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/checkpoints/config</td>
+<td>checkpoints 配置</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/checkpoints/details/:checkpointid</td>
+<td>checkpoints 详情</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/checkpoints/details/:checkpointid/subtasks/:vertexid</td>
+<td>任务和子任务的检查点信息</td>
+</tr>
+</tbody>
+</table>
+<h2 id="jobs-vertices">Jobs Vertices</h2>
+<table>
+<thead>
+<tr>
+<th align="right">Method</th>
+<th>URI</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/accumulators</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/backpressure</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/metrics</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/subtasks/accumulators</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/subtasks/metrics</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/subtasks/:subtaskindex</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/subtasks/:subtaskindex/attempts/:attempt</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/subtasks/:subtaskindex/attempts/:attempt/accumulators</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/subtasks/:subtaskindex/metrics</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/subtasktimes</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/taskmanagers</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jobs/:jobid/vertices/:vertexid/watermarks</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="datasets">DataSets</h2>
+<table>
+<thead>
+<tr>
+<th align="right">Method</th>
+<th>URI</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">GET</td>
+<td>/datasets</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/datasets/delete/:triggerid</td>
+<td></td>
+</tr>
+<tr>
+<td align="right">DELETE</td>
+<td>/datasets/:datasetid</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="jars">Jars</h2>
+<table>
+<thead>
+<tr>
+<th align="right">Method</th>
+<th>URI</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">GET</td>
+<td>/jars</td>
+<td>查看上传的 jar 包</td>
+</tr>
+<tr>
+<td align="right">POST</td>
+<td>/jars/upload</td>
+<td>上传 jar 包</td>
+</tr>
+<tr>
+<td align="right">DELETE</td>
+<td>/jars/:jarid</td>
+<td>删除 jar 包</td>
+</tr>
+<tr>
+<td align="right">GET</td>
+<td>/jars/:jarid/plan</td>
+<td>查看 jar 包 的 dataflow 计划</td>
+</tr>
+<tr>
+<td align="right">POST</td>
+<td>/jars/:jarid/run</td>
+<td>运行 jar 包</td>
+</tr>
+</tbody>
+</table>
+<h2 id="read-more">Read More</h2>
+<ul>
+<li>
+  <a href="https://ci.apache.org/projects/flink/flink-docs-stable/monitoring/rest_api.html">Monitoring REST API</a></li>
+</ul>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex justify-between">
+
+
+
+
+
+  <div>
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/edit/master/HuGo/content/docs/Monitor/REST-API.md" target="_blank" rel="noopener">
+      <img src="/Flink/svg/edit.svg" class="book-icon" alt="Edit" />
+      <span>Edit this page</span>
+    </a>
+  </div>
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#monitoring-rest-api">Monitoring REST API</a>
+      <ul>
+        <li><a href="#cluster">Cluster</a></li>
+        <li><a href="#jobmanager">JobManager</a></li>
+        <li><a href="#taskmanager">TaskManager</a></li>
+        <li><a href="#jobs">Jobs</a></li>
+        <li><a href="#jobs-vertices">Jobs Vertices</a></li>
+        <li><a href="#datasets">DataSets</a></li>
+        <li><a href="#jars">Jars</a></li>
+        <li><a href="#read-more">Read More</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

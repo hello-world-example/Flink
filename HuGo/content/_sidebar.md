@@ -14,6 +14,7 @@ headless: true
   - [flink-conf.yaml 配置]({{< relref "/docs/Opt/Flink-Conf.yaml.md" >}})
 - **Monitor**
   - [Flink Prometheus]({{< relref "/docs/Monitor/Prometheus.md" >}})
+  - [REST API]({{< relref "/docs/Monitor/REST-API.md" >}})
 - [获取 Github 源码]({{< relref "/docs/Quick-Start/github-code.md" >}})
 - [**FAQ..**]({{< relref "/docs/FAQ/_index.md" >}})
 - **Tutorial**
