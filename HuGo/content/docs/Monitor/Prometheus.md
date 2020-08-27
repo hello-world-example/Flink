@@ -52,6 +52,7 @@ scrape_configs:
 
 > - 安装 Grafana ：略
 > - 导入 Dashboard https://grafana.com/grafana/dashboards/11049
+> - @see [grafana-flink-databoard.json](/Flink/docs/Monitor/grafana-flink-databoard.json)
 
 
 
