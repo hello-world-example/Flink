@@ -15,7 +15,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hello-world-example.github.io/Flink/_sidebar/</guid>
-      <description> Quick-Start   Local 快速安装  Docker 方式安装  Word Count 示例程序   Opt   Standalone 集群方式  Standalone HA 部署  flink-conf.yaml 配置   Monitor   Flink Prometheus  REST API    获取 Github 源码  FAQ.. Tutorial   Ververica    </description>
+      <description> Quick-Start   Local 快速安装  Docker 方式安装  Word Count 示例程序   Concept 概念   Environment  Source  _Sink    Table &amp;amp; SQL.. Opt   Standalone 集群方式  Standalone HA 部署  flink-conf.yaml 配置   Monitor   Flink Prometheus  REST API    FAQ..   获取 Github 源码   Tutorial   Ververica    </description>
     </item>
     
     <item>
@@ -25,6 +25,34 @@
       
       <guid>https://hello-world-example.github.io/Flink/docs/Cli/sql-client/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Concept/Environment/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Concept/Environment/</guid>
+      <description>Flink Environment 关系  获取方式 import org.apache.flink.api.java.ExecutionEnvironment; import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment; import org.apache.flink.table.api.bridge.java.BatchTableEnvironment; import org.apache.flink.table.api.bridge.java.StreamTableEnvironment; // DataSet ExecutionEnvironment bEnv = ExecutionEnvironment.getExecutionEnvironment(); // DataSet Table BatchTableEnvironment btEnv = BatchTableEnvironment.create(bEnv); // DataStream StreamExecutionEnvironment sEnv = StreamExecutionEnvironment.getExecutionEnvironment(); // DataStream Table StreamTableEnvironment stEnv = StreamTableEnvironment.create(sEnv); Read More   Flink Environment 概览  </description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Concept/Sink/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Concept/Sink/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/Concept/Source/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/Concept/Source/</guid>
+      <description>Flink Source Read More     Source
+ env.readTextFile env.socketTextStream env.fromCollection Connector  </description>
     </item>
     
     <item>
@@ -83,6 +111,15 @@
     
     <item>
       <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/FAQ/Github-Code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/FAQ/Github-Code/</guid>
+      <description>获取 Github 源码 获取代码 # clone 国内镜像仓库，速度会快一点 $ git clone https://gitee.com/mirrors/apache-flink.git flink $ cd flink # 设置远程仓库为自己 clone 的仓库 $ git remote set-url origin https://github.com/o-fork/flink.git # 更新一下代码 $ git pull -p # Alibaba Blink 分支 $ git checkout blink # 官方 1.8 版本分支 $ git checkout release-1.8 # 从官方 1.8 版本分支，创建一个自己的分支 $ git checkout -b dev_kail_v1.8 # 推送同步一下远程 $ git push --set-upstream origin dev_kail_v1.8 打包 添加 pom.xml 仓库 vim pom.xml 添加 阿里的 Maven 仓库，这样打包(下载 jar 包)时会稍微块一点</description>
+    </item>
+    
+    <item>
+      <title></title>
       <link>https://hello-world-example.github.io/Flink/docs/Internals/Environment/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -96,8 +133,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hello-world-example.github.io/Flink/docs/Monitor/Prometheus/</guid>
-      <description>Flink Prometheus 开启 PrometheusReporter $ vim conf/flink-conf.yaml metrics.reporters: prom metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter metrics.reporter.prom.port: 9999 # 删除日志 $ rm -rf log/* # 分发配置 $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s223.flink.learn.wx:/opt/websuite/ # 启动集群 $ ./bin/start-cluster.sh # 查看 暴露的 Prometheus 指标 $ curl http://s220.flink.learn.wx:9999 $ curl http://s221.flink.learn.wx:9999 配置 Prometheus  安装 Prometheus ：略
- # 增加以下配置并重启 $ vim prometheus.yml scrape_configs: - job_name: &amp;#39;flink_learn_cluster&amp;#39; static_configs: - targets: - s220.</description>
+      <description>Flink Prometheus  Flink 基于 Prometheus 的数据传递方式有两种  Flink 暴露数据接口，Prometheus 定时调用数据接口进行收集（PrometheusReporter）  优点： 监控策略变更的时候，无需修改 Flink，调整 Prometheus 即可 缺点：Flink 扩容的时候，需要修改 Prometheus 配置   Flink 主动推送给 Prometheus pushgateway  优缺点与 PrometheusReporter 方式相反     以下使用 PrometheusReporter 的方式  开启 PrometheusReporter $ vim conf/flink-conf.yaml metrics.reporters: prom metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter metrics.reporter.prom.port: 9999 # 删除日志 $ rm -rf log/* # 分发配置 $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.</description>
     </item>
     
     <item>
@@ -151,15 +187,6 @@
     
     <item>
       <title></title>
-      <link>https://hello-world-example.github.io/Flink/docs/Quick-Start/github-code/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://hello-world-example.github.io/Flink/docs/Quick-Start/github-code/</guid>
-      <description>获取 Github 源码 获取代码 # clone 国内镜像仓库，速度会快一点 $ git clone https://gitee.com/mirrors/apache-flink.git flink $ cd flink # 设置远程仓库为自己 clone 的仓库 $ git remote set-url origin https://github.com/o-fork/flink.git # 更新一下代码 $ git pull -p # Alibaba Blink 分支 $ git checkout blink # 官方 1.8 版本分支 $ git checkout release-1.8 # 从官方 1.8 版本分支，创建一个自己的分支 $ git checkout -b dev_kail_v1.8 # 推送同步一下远程 $ git push --set-upstream origin dev_kail_v1.8 打包 添加 pom.xml 仓库 vim pom.xml 添加 阿里的 Maven 仓库，这样打包(下载 jar 包)时会稍微块一点</description>
-    </item>
-    
-    <item>
-      <title></title>
       <link>https://hello-world-example.github.io/Flink/docs/Quick-Start/Install-By-Local/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
@@ -173,7 +200,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://hello-world-example.github.io/Flink/docs/TODO/</guid>
-      <description>TODO  自定义监控指标  </description>
+      <description>TODO  内置 Zookeeper ？？ SQL API ？？ 自定义监控指标  核心概念  Environment Window 窗口的类型  滚动时间窗口 滑动时间窗口 数据大小窗口 ..   Time 时间  事件时间 摄入时间 处理时间 ..   并行度（不能大于 Slot 个数）  算子级别 运行环境级别 客户端级别 系统级别    </description>
     </item>
     
     <item>

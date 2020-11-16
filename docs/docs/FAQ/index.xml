@@ -9,5 +9,14 @@
 	<atom:link href="https://hello-world-example.github.io/Flink/docs/FAQ/index.xml" rel="self" type="application/rss+xml" />
     
     
+    <item>
+      <title></title>
+      <link>https://hello-world-example.github.io/Flink/docs/FAQ/Github-Code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://hello-world-example.github.io/Flink/docs/FAQ/Github-Code/</guid>
+      <description>获取 Github 源码 获取代码 # clone 国内镜像仓库，速度会快一点 $ git clone https://gitee.com/mirrors/apache-flink.git flink $ cd flink # 设置远程仓库为自己 clone 的仓库 $ git remote set-url origin https://github.com/o-fork/flink.git # 更新一下代码 $ git pull -p # Alibaba Blink 分支 $ git checkout blink # 官方 1.8 版本分支 $ git checkout release-1.8 # 从官方 1.8 版本分支，创建一个自己的分支 $ git checkout -b dev_kail_v1.8 # 推送同步一下远程 $ git push --set-upstream origin dev_kail_v1.8 打包 添加 pom.xml 仓库 vim pom.xml 添加 阿里的 Maven 仓库，这样打包(下载 jar 包)时会稍微块一点</description>
+    </item>
+    
   </channel>
 </rss>

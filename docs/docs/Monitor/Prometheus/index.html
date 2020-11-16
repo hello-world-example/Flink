@@ -4,10 +4,8 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Flink Prometheus 开启 PrometheusReporter $ vim conf/flink-conf.yaml metrics.reporters: prom metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter metrics.reporter.prom.port: 9999 # 删除日志 $ rm -rf log/* # 分发配置 $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s223.flink.learn.wx:/opt/websuite/ # 启动集群 $ ./bin/start-cluster.sh # 查看 暴露的 Prometheus 指标 $ curl http://s220.flink.learn.wx:9999 $ curl http://s221.flink.learn.wx:9999 配置 Prometheus  安装 Prometheus ：略
- # 增加以下配置并重启 $ vim prometheus.yml scrape_configs: - job_name: &#39;flink_learn_cluster&#39; static_configs: - targets: - s220."><meta property="og:title" content="" />
-<meta property="og:description" content="Flink Prometheus 开启 PrometheusReporter $ vim conf/flink-conf.yaml metrics.reporters: prom metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter metrics.reporter.prom.port: 9999 # 删除日志 $ rm -rf log/* # 分发配置 $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s223.flink.learn.wx:/opt/websuite/ # 启动集群 $ ./bin/start-cluster.sh # 查看 暴露的 Prometheus 指标 $ curl http://s220.flink.learn.wx:9999 $ curl http://s221.flink.learn.wx:9999 配置 Prometheus  安装 Prometheus ：略
- # 增加以下配置并重启 $ vim prometheus.yml scrape_configs: - job_name: &#39;flink_learn_cluster&#39; static_configs: - targets: - s220." />
+<meta name="description" content="Flink Prometheus  Flink 基于 Prometheus 的数据传递方式有两种  Flink 暴露数据接口，Prometheus 定时调用数据接口进行收集（PrometheusReporter）  优点： 监控策略变更的时候，无需修改 Flink，调整 Prometheus 即可 缺点：Flink 扩容的时候，需要修改 Prometheus 配置   Flink 主动推送给 Prometheus pushgateway  优缺点与 PrometheusReporter 方式相反     以下使用 PrometheusReporter 的方式  开启 PrometheusReporter $ vim conf/flink-conf.yaml metrics.reporters: prom metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter metrics.reporter.prom.port: 9999 # 删除日志 $ rm -rf log/* # 分发配置 $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1."><meta property="og:title" content="" />
+<meta property="og:description" content="Flink Prometheus  Flink 基于 Prometheus 的数据传递方式有两种  Flink 暴露数据接口，Prometheus 定时调用数据接口进行收集（PrometheusReporter）  优点： 监控策略变更的时候，无需修改 Flink，调整 Prometheus 即可 缺点：Flink 扩容的时候，需要修改 Prometheus 配置   Flink 主动推送给 Prometheus pushgateway  优缺点与 PrometheusReporter 方式相反     以下使用 PrometheusReporter 的方式  开启 PrometheusReporter $ vim conf/flink-conf.yaml metrics.reporters: prom metrics.reporter.prom.class: org.apache.flink.metrics.prometheus.PrometheusReporter metrics.reporter.prom.port: 9999 # 删除日志 $ rm -rf log/* # 分发配置 $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s221.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1.11.1 flink@s222.flink.learn.wx:/opt/websuite/ $ scp -r -P2208 /opt/websuite/flink-1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/Monitor/Prometheus/" />
 <meta property="article:modified_time" content="2020-08-27T10:59:12+08:00" />
@@ -59,6 +57,18 @@ https://github.com/alex-shpak/hugo-book
   <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
 </ul>
 </li>
+<li><strong>Concept 概念</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Concept/Environment/">Environment</a></li>
+<li>
+  <a href="/Flink/docs/Concept/Source/">Source</a></li>
+<li>
+  <a href="/Flink/docs/Concept/Sink/">_Sink</a></li>
+</ul>
+</li>
+<li>
+  <a href="/Flink/docs/Table-SQL/"><strong>Table &amp; SQL..</strong></a></li>
 <li><strong>Opt</strong>
 <ul>
 <li>
@@ -78,9 +88,12 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 <li>
-  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
+  <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a>
+<ul>
 <li>
-  <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a></li>
+  <a href="/Flink/docs/FAQ/Github-Code/">获取 Github 源码</a></li>
+</ul>
+</li>
 <li><strong>Tutorial</strong>
 <ul>
 <li>
@@ -151,6 +164,25 @@ https://github.com/alex-shpak/hugo-book
       
       
   <article class="markdown"><h1 id="flink-prometheus">Flink Prometheus</h1>
+<ul>
+<li>Flink 基于 Prometheus 的数据传递方式有两种
+<ul>
+<li>Flink 暴露数据接口，Prometheus 定时调用数据接口进行收集（PrometheusReporter）
+<ul>
+<li>优点： 监控策略变更的时候，无需修改 Flink，调整 Prometheus 即可</li>
+<li>缺点：Flink 扩容的时候，需要修改 Prometheus 配置</li>
+</ul>
+</li>
+<li>Flink 主动推送给 Prometheus 
+  <a href="https://github.com/prometheus/pushgateway">pushgateway</a>
+<ul>
+<li>优缺点与 PrometheusReporter 方式相反</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>以下使用 PrometheusReporter 的方式</li>
+</ul>
 <h2 id="开启-prometheusreporter">开启 PrometheusReporter</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim conf/flink-conf.yaml 
 metrics.reporters: prom
@@ -240,7 +272,17 @@ $ vim prometheus.yml
 </div>
 
  
-        
+        <script>
+var images = document.getElementsByTagName("img")
+console.info(images.length)
+for(var i=0; i<images.length; i++){
+  var image = images[i]
+  var src = image.getAttribute("src");
+  if(src.startsWith("-images")){
+    image.setAttribute("src", "../" + src)
+  }
+}
+</script>
       </footer>
 
       

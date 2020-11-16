@@ -14,6 +14,8 @@
         <module>demo-flink-table</module>
 
         <module>my-flink-project</module>
+        <module>demo-flink-concept</module>
+        <module>draw-flink</module>
     </modules>
 
     <properties>
@@ -26,9 +28,8 @@
 
         <slf4j.version>1.7.30</slf4j.version>
 
-        <!-- 稳定 -->
-        <flink.version>1.11.1</flink.version>
-        <flink.scala.version>2.12</flink.scala.version>
+        <flink.version>1.11.2</flink.version>
+        <flink.scala.version>2.11</flink.scala.version>
 
         <kafka.version>2.5.0</kafka.version>
 
@@ -62,16 +63,9 @@
 
             <dependency>
                 <groupId>org.apache.flink</groupId>
-                <artifactId>flink-java</artifactId>
-                <version>${flink.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.flink</groupId>
                 <artifactId>flink-clients_${flink.scala.version}</artifactId>
                 <version>${flink.version}</version>
             </dependency>
-
 
             <dependency>
                 <groupId>org.apache.flink</groupId>
@@ -85,16 +79,17 @@
                 <version>${flink.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.apache.flink</groupId>
-                <artifactId>flink-table-api-java</artifactId>
-                <version>${flink.version}</version>
-            </dependency>
-
+            <!-- Table -->
             <dependency>
                 <groupId>org.apache.flink</groupId>
                 <artifactId>flink-table-planner_${flink.scala.version}</artifactId>
                 <version>${flink.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.flink</groupId>
+                        <artifactId>flink-table-api-scala-bridge_2.11</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
 
             <!-- region Connector -->

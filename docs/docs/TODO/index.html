@@ -4,11 +4,11 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="TODO  自定义监控指标  "><meta property="og:title" content="" />
-<meta property="og:description" content="TODO  自定义监控指标  " />
+<meta name="description" content="TODO  内置 Zookeeper ？？ SQL API ？？ 自定义监控指标  核心概念  Environment Window 窗口的类型  滚动时间窗口 滑动时间窗口 数据大小窗口 ..   Time 时间  事件时间 摄入时间 处理时间 ..   并行度（不能大于 Slot 个数）  算子级别 运行环境级别 客户端级别 系统级别    "><meta property="og:title" content="" />
+<meta property="og:description" content="TODO  内置 Zookeeper ？？ SQL API ？？ 自定义监控指标  核心概念  Environment Window 窗口的类型  滚动时间窗口 滑动时间窗口 数据大小窗口 ..   Time 时间  事件时间 摄入时间 处理时间 ..   并行度（不能大于 Slot 个数）  算子级别 运行环境级别 客户端级别 系统级别    " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://hello-world-example.github.io/Flink/docs/TODO/" />
-<meta property="article:modified_time" content="2020-08-26T17:23:12+08:00" />
+<meta property="article:modified_time" content="2020-08-27T14:11:54+08:00" />
 <title>T O D O | Flink</title>
 <link rel="icon" href="/Flink/favicon.png" type="image/x-icon">
 
@@ -57,6 +57,18 @@ https://github.com/alex-shpak/hugo-book
   <a href="/Flink/docs/Example/hello-word-count/">Word Count 示例程序</a></li>
 </ul>
 </li>
+<li><strong>Concept 概念</strong>
+<ul>
+<li>
+  <a href="/Flink/docs/Concept/Environment/">Environment</a></li>
+<li>
+  <a href="/Flink/docs/Concept/Source/">Source</a></li>
+<li>
+  <a href="/Flink/docs/Concept/Sink/">_Sink</a></li>
+</ul>
+</li>
+<li>
+  <a href="/Flink/docs/Table-SQL/"><strong>Table &amp; SQL..</strong></a></li>
 <li><strong>Opt</strong>
 <ul>
 <li>
@@ -76,9 +88,12 @@ https://github.com/alex-shpak/hugo-book
 </ul>
 </li>
 <li>
-  <a href="/Flink/docs/Quick-Start/github-code/">获取 Github 源码</a></li>
+  <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a>
+<ul>
 <li>
-  <a href="/Flink/docs/FAQ/"><strong>FAQ..</strong></a></li>
+  <a href="/Flink/docs/FAQ/Github-Code/">获取 Github 源码</a></li>
+</ul>
+</li>
 <li><strong>Tutorial</strong>
 <ul>
 <li>
@@ -129,7 +144,11 @@ https://github.com/alex-shpak/hugo-book
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#todo">TODO</a></li>
+    <li><a href="#todo">TODO</a>
+      <ul>
+        <li><a href="#核心概念">核心概念</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 
@@ -143,7 +162,37 @@ https://github.com/alex-shpak/hugo-book
       
   <article class="markdown"><h1 id="todo">TODO</h1>
 <ul>
+<li>内置 Zookeeper ？？</li>
+<li>SQL API ？？</li>
 <li>自定义监控指标</li>
+</ul>
+<h2 id="核心概念">核心概念</h2>
+<ul>
+<li>Environment</li>
+<li>Window 窗口的类型
+<ul>
+<li>滚动时间窗口</li>
+<li>滑动时间窗口</li>
+<li>数据大小窗口</li>
+<li>..</li>
+</ul>
+</li>
+<li>Time 时间
+<ul>
+<li>事件时间</li>
+<li>摄入时间</li>
+<li>处理时间</li>
+<li>..</li>
+</ul>
+</li>
+<li>并行度（不能大于 Slot 个数）
+<ul>
+<li>算子级别</li>
+<li>运行环境级别</li>
+<li>客户端级别</li>
+<li>系统级别</li>
+</ul>
+</li>
 </ul>
 </article>
  
@@ -157,9 +206,9 @@ https://github.com/alex-shpak/hugo-book
 
   <div>
     
-    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/commit/c584d1cf442fb81d75e204c061ca169720815a39" title='Last modified by kaibin.yang | Aug 26, 2020' target="_blank" rel="noopener">
+    <a class="flex align-center" href="https://github.com/hello-world-example/Flink/commit/582fc480d64af94316f00f17e4f99b6fd6e1e0e2" title='Last modified by kaibin.yang | Aug 27, 2020' target="_blank" rel="noopener">
       <img src="/Flink/svg/calendar.svg" class="book-icon" alt="Calendar" />
-      <span>Aug 26, 2020</span>
+      <span>Aug 27, 2020</span>
     </a>
   </div>
 
@@ -175,7 +224,17 @@ https://github.com/alex-shpak/hugo-book
 </div>
 
  
-        
+        <script>
+var images = document.getElementsByTagName("img")
+console.info(images.length)
+for(var i=0; i<images.length; i++){
+  var image = images[i]
+  var src = image.getAttribute("src");
+  if(src.startsWith("-images")){
+    image.setAttribute("src", "../" + src)
+  }
+}
+</script>
       </footer>
 
       
@@ -194,7 +253,11 @@ https://github.com/alex-shpak/hugo-book
       
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#todo">TODO</a></li>
+    <li><a href="#todo">TODO</a>
+      <ul>
+        <li><a href="#核心概念">核心概念</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 

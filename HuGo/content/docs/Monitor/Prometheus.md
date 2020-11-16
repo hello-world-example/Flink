@@ -2,6 +2,16 @@
 
 
 
+- Flink 基于 Prometheus 的数据传递方式有两种
+  - Flink 暴露数据接口，Prometheus 定时调用数据接口进行收集（PrometheusReporter）
+    - 优点： 监控策略变更的时候，无需修改 Flink，调整 Prometheus 即可
+    - 缺点：Flink 扩容的时候，需要修改 Prometheus 配置
+  - Flink 主动推送给 Prometheus [pushgateway](https://github.com/prometheus/pushgateway)
+    - 优缺点与 PrometheusReporter 方式相反
+- 以下使用 PrometheusReporter 的方式
+
+
+
 ## 开启 PrometheusReporter
 
 ```bash
