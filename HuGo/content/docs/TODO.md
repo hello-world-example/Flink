@@ -6,9 +6,14 @@
 
 
 
+- Flink SQL： https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/table/sql/queries.html#operations
+- Flink CEP： https://ci.apache.org/projects/flink/flink-docs-release-1.11/dev/libs/cep.html
+- 
+
+
+
 ## 核心概念
 
-- Environment
 - Window 窗口的类型
   - 滚动时间窗口
   - 滑动时间窗口
