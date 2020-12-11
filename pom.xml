@@ -18,13 +18,14 @@
 
         <module>demo-flink-example</module>
         <module>demo-flink-techshare</module>
+        <module>demo-flink-cep</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
 
         <mainClass>缺少 mainClass</mainClass>
 
@@ -35,7 +36,6 @@
         <hadoop.version>2.6.5</hadoop.version>
 
         <kafka.version>2.5.0</kafka.version>
-
     </properties>
 
     <dependencies>
