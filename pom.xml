@@ -19,6 +19,7 @@
         <module>demo-flink-example</module>
         <module>demo-flink-techshare</module>
         <module>demo-flink-cep</module>
+        <module>demo-flink-cdc</module>
     </modules>
 
     <properties>
